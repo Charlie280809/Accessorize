@@ -1,9 +1,21 @@
-<!DOCTYPE html>
+<?php 
+    function canLogin($p_email, $p_password){
+        $conn = new mysqli("localhost", "root", "root", "accessorize");
+        $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email"); //preparen zodat men niet kan sjoemelen met die ':email'
+		$statement->bindValue(':email', $p_email); //':email' binden aan $p_email
+		$statement->execute();
+
+    }   
+    // $conn = new PDO('mysql:host=localhost;dbname=accessorize', 'root', 'root');
+
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to Accessorize</title>
+    <link rel="stylesheet" href="style_login.css">
 </head>
 <body>
 <div class="form form_login">
