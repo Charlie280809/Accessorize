@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/style_signup.css">
 </head>
 <body>
-    <div class="form form_login">
+    <div class="form_field">
         <form action="" method="post">
                       
             <h2>Sign up to Accessorize!</h2>
@@ -34,18 +34,18 @@
                 </p>
             </div> -->
 
-            <div class="form_field">					
+            <div>					
                 <label for="Email">E-mail</label>
 				<input type="text" name="email">
 			</div>
 
-			<div class="form_field">
+			<div>
 				<label for="Password">Password</label>
 				<input type="password" name="password">
 			</div>
 
-			<div class="form_field">
-				<input type="submit" value="Sign in" class="btn_submit">	
+			<div>
+				<input type="submit" value="Sign up" class="btn_submit">	
 			</div>
 
         </form>
