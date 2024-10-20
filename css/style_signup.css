@@ -5,10 +5,45 @@
 body{
     background-color: rgb(55, 55, 55);
     font-family: Helvetica, sans-serif;
-    color: white;
+    color: black;
 
 }
 
 .hidden{
     display: none;
+}
+
+.form_field{
+    width: 100%;
+    max-width: 500px;
+    margin: 20% auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.form_field input[type=text], 
+.form_field input[type=password] 
+{
+  width: 100%;
+  padding: 0.3em;
+  font-size: 1.4em;
+  margin: 0.3em 0;
+}
+
+.btn_submit{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: rgb(42, 45, 180);
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn_submit:hover{
+    background-color: rgb(42, 45, 220);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
