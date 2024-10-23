@@ -1,18 +1,19 @@
 <?php
-    if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
-        $email = $_POST['email'];
-        $password = $_POST['password']; 
+include_once(__DIR__."/classes/User.php");
 
-        $options = [
-            'cost' => 15, 
-        ];
-        $hash = password_hash($password, PASSWORD_DEFAULT, $options); 
-        
-        $conn = new PDO('mysql:host=localhost;dbname=accessorize', 'root', password: 'root');
-        $statement = $conn->prepare("INSERT INTO `users`(`email`, `password`) VALUES (:email, :password)"); //accounts toevoegen in de databank
-        $statement->bindValue(":email", $email); 
-        $statement->bindValue(":password", $hash);
-        $statement->execute();
+    if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
+        try{
+            $user = new User();
+            $user->setUsername($_POST['username']);
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
+            $user->save();
+            //succes-variabele
+        }
+        catch(Exception $e){
+            $error = $e->getMessage();
+        }
+
     }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -33,6 +34,11 @@
                     wachtwoord moet dit en dit en dit zijn..
                 </p>
             </div> -->
+
+            <div>					
+                <label for="Username">Username</label>
+				<input type="text" name="username">
+			</div>
 
             <div>					
                 <label for="Email">E-mail</label>
