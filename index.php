@@ -1,10 +1,8 @@
 <?php
-    // $conn = new mysqli("localhost", "root", "root", "accessorize");
-    
-    // $sql = "SELECT * FROM products";
-    // $result = $conn->query($sql);
-    // $products = $result->fetch_all(MYSQLI_ASSOC);
-
+  session_start();
+  if($_SESSION['loggedin']!== true){
+    header('Location: login.php');
+  }else{
     //PDO connection
     $conn = new PDO("mysql:dbname=accessorize;host=localhost", "root", "root");
     // select * from products and fetch as array
@@ -12,12 +10,13 @@
     $statement->execute();
     $products = $statement->fetchALL(PDO::FETCH_ASSOC);
 
+  }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessorize</title>
+    <title>Accessorize home</title>
 </head>
 <body>
     <h1>Accessorize</h1>
