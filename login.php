@@ -18,6 +18,10 @@
 		// 	//not found
 		// 	return false;
 		// }
+
+
+
+        //if(User::canLogin($email, $password)){  GO, maak sessie + redirect naar home  }
     }   
 
 
