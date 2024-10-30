@@ -6,7 +6,7 @@
             //Db::getConnection() 
             if(self::$conn == null){
                 echo "👾";
-                self::$conn = new PDO("mysql:host=localhost;dbname=demo_backenddev","root","root");
+                self::$conn = new PDO("mysql:host=localhost;dbname=accessorize","root","root");
                 return self::$conn;
             }
             else{
