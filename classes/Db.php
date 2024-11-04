@@ -4,7 +4,7 @@
         public static function getConnection(){
             if(self::$conn == null){
                 echo "👾";
-                self::$conn = new PDO("mysql:host=localhost;dbname=accessorize","root","root");
+                self::$conn = new PDO('mysql:host=localhost;dbname=accessorize','root','root');
                 return self::$conn;
             }
             else{
