@@ -1,5 +1,5 @@
 <?php
-    include_once(__DIR__."/Db.php");
+    include_once("Db.php");
     class User{
         private $id; //automatisch gegenereerd
         private $username; //deze word ingevuld door de gebruiker zelf in de signup
@@ -55,31 +55,20 @@
         }
 
         
-    //     public function save (){         
-    //         $conn = Db::getConnection();
+        public function save (){         
+            $conn = Db::getConnection();
 
-    //         $statement = $conn->prepare("INSERT INTO users(username, email, password) VALUES (:username, :email, :password);"); //accounts toevoegen in de databank
-    //         $statement->bindValue(":username", $this->getUsername());
-    //         $statement->bindValue(":email", $this->getEmail()); 
-    //         $statement->bindValue(":password", $this->getPassword());
-    //         return $statement->execute();
-    //     }
+            $statement = $conn->prepare("INSERT INTO users(username, email, password, currency_balance, active) VALUES (:username, :email, :password, 1000, 1);"); //accounts toevoegen in de databank
+            $statement->bindValue(":username", $this->getUsername());
+            $statement->bindValue(":email", $this->getEmail()); 
+            $statement->bindValue(":password", $this->getPassword());
 
-    // }
+            return $statement->execute();
 
-
-    public function save (){         
-        $conn = Db::getConnection();
-    
-        $statement = $conn->prepare("INSERT INTO users(username, email, password) VALUES (:username, :email, :password);");
-        $statement->bindValue(":username", $this->getUsername());
-        $statement->bindValue(":email", $this->getEmail()); 
-        $statement->bindValue(":password", $this->getPassword());
-    
-        if (!$statement->execute()) {
-            throw new Exception("Failed to save user.");
+            if (!$statement->execute()) {
+                $errorInfo = $statement->errorInfo();
+                throw new Exception("Failed to save user: " . $errorInfo[2]);
+            }
         }
-        return true;
-    }
 }
 ?>
