@@ -1,5 +1,5 @@
 <?php
-  include_once(__DIR__."/classes/Products.php"); 
+  include_once(__DIR__."/classes/Product.php"); 
   session_start();
   // if($_SESSION['loggedin']!== true){
   //   header('Location: login.php');
