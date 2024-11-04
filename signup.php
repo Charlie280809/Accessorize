@@ -7,13 +7,15 @@ include_once(__DIR__."/classes/User.php");
             $user->setUsername($_POST['username']);
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
+
+            var_dump($user);
             $user->save();
-            //succes-variabele
+            
+            $succes = "User saved";
         }
         catch(Exception $e){
             $error = $e->getMessage();
         }
-
     }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -21,7 +23,7 @@ include_once(__DIR__."/classes/User.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up to Accessorize</title>
-    <link rel="stylesheet" href="css/style_signup.css">
+    <link rel="stylesheet" href="css/style_signup-login.css">
 </head>
 <body>
     <div class="form_field">
