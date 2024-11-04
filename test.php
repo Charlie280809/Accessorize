@@ -11,18 +11,14 @@
 			$hash = $user['password']; //hash van user is password uit de databank
 
 			if(password_verify($p_password, $hash)){
-                //als $p_password gelijk is aan $hash
-				// return true;
-                echo 'JA';
+				return true;
 			}else{
-				// return false;
-                echo "NEEEn";
+				return false;
 			}
-        }
-		// }else{
-		// 	//not found
-		// 	return false;
-		// }
+		}else{
+			//not found
+			return false;
+		}
 
         //if(User::canLogin($email, $password)){  GO, maak sessie + redirect naar home  }
     }   
