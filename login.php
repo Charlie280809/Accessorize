@@ -3,11 +3,11 @@
     function canLogin($p_email, $p_password){
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email"); //preparen zodat men niet kan sjoemelen met die ':email'
-		$statement->bindValue(':email', $p_email); //':email' binden aan $p_email
+		$statement->bindValue(":email", $p_email); //':email' binden aan $p_email
         $statement->execute();
 
         $user = $statement->fetch(PDO::FETCH_ASSOC); //user linken met de databank
-        if($user){
+        if($user){ //als de user gevonden is in de databank 
 			$hash = $user['password']; //hash van user is password uit de databank
 
 			if(password_verify($p_password, $hash)){
@@ -31,6 +31,7 @@
             session_start();
             $_SESSION['loggedin'] = true;
             header('Location: index.php');
+            echo "logged in.";
         }else{
             $error = true;
         }
@@ -42,11 +43,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to Accessorize</title>
-    <link rel="stylesheet" href="style_login.css">
+    <link rel="stylesheet" href="css/style_signup-login.css">
 </head>
 <body>
-<div class="form form_login">
+<div class="form_field">
         <form action="" method="post">
+
+            <h2>Login to Accessorize</h2>
             
             <?php if(isset($error)): ?> 
                 <div class="error">
@@ -56,17 +59,17 @@
                 </div>
             <?php endif; ?>
 
-            <div class="form_field">					
+            <div>					
                 <label for="Email">E-mail</label>
 				<input type="text" name="email">
 			</div>
 
-			<div class="form_field">
+			<div>
 				<label for="Password">Password</label>
 				<input type="password" name="password">
 			</div>
 
-			<div class="form_field">
+			<div>
 				<input type="submit" value="Sign in" class="btn_submit">	
 				<!-- <input type="checkbox" id="rememberMe"><label for="rememberMe" class="label__inline">Remember me</label> -->
 			</div>
