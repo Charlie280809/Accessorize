@@ -22,15 +22,6 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.form_field input[type=text], 
-.form_field input[type=password] 
-{
-  width: 100%;
-  padding: 0.3em;
-  font-size: 1.4em;
-  margin: 0.3em 0;
-}
-
 .btn_submit{
     width: 100%;
     padding: 10px;
