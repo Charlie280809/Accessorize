@@ -6,5 +6,5 @@
       <input type="text" name="search">
     </form>
     
-    <a href="logout.php" class="navbar__logout">Hi <?php echo htmlspecialchars($_SESSION['email']); ?>, logout?</a>
+    <a href="logout.php" class="navbar__logout">Hi USERNAMEE <?php //echo htmlspecialchars($_SESSION['email']); ?>, logout?</a>
 </nav>

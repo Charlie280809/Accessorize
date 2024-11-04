@@ -7,8 +7,6 @@ include_once(__DIR__."/classes/User.php");
             $user->setUsername($_POST['username']);
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
-
-            var_dump($user);
             $user->save();
             
             $succes = "User saved";
