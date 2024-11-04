@@ -11,9 +11,10 @@
 			$hash = $user['password']; //hash van user is password uit de databank
 
 			if(password_verify($p_password, $hash)){
-				return true;
+                //als $p_password gelijk is aan $hash
+			     return true;
 			}else{
-				return false;
+				 return false;
 			}
 		}else{
 			//not found
