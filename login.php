@@ -75,6 +75,8 @@
 				<!-- <input type="checkbox" id="rememberMe"><label for="rememberMe" class="label__inline">Remember me</label> -->
 			</div>
 
+            <p>Don't have an account yet? <a href="signup.php">Create one here!</a></p>
+
         </form>
     </div>
 </body>
