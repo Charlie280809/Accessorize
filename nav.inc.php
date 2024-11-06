@@ -1,5 +1,6 @@
 <nav class="navbar">
-    <a href="index.php" class="logo">LOGO</a>
+    <a href="index.php" class="logo"><img src="" alt=""></a>
+
     <a href="index.php">Home</a>
     
     <form action="" method="get">
