@@ -54,6 +54,8 @@ include_once(__DIR__."/classes/User.php");
 				<input type="submit" value="Sign up" class="btn_submit">	
 			</div>
 
+            <p>Already have an account? <a href="login.php">Login here!</a></p>
+
         </form>
     </div>
 </body>
