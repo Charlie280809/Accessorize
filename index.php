@@ -19,12 +19,15 @@
     <?php include_once("nav.inc.php") ?>
     <h1>Accessorize</h1>
 
-        <?php foreach($products as $key => $p): ?>
-          <!-- <a href="product.php?id=<?php //echo $key ?>"></a> -->
+    <div class="collection">
+      <?php foreach($products as $key => $p): ?>
+          <a href="product.php?id=<?php echo $key ?>">linkk voor <?php echo $key?></a>
+
         <article>
             <h2><?php echo $p['title'] ?>: €<?php echo $p['price'] ?></h2>
         </article>
-        <?php endforeach; ?>
+      <?php endforeach; ?>
+    </div>
   </div>
 </body>
 </html>
