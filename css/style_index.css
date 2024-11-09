@@ -6,7 +6,6 @@ body{
     background-color: rgb(250, 250, 250);
     font-family: Helvetica, sans-serif;
     color: black;
-
 }
 
 .hidden{
@@ -14,12 +13,21 @@ body{
 }
 
 .navbar{
-    background-color: #ff0000;
+    background-color: red;
     display: flex;
-    flex-direction: row;
-    /* justify-content: space-between; */
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
 }
-/* .navbar_top{
+.navbar_top{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    width: 100%;
+    margin: 0;
+}
+.navbar_search{
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -27,7 +35,27 @@ body{
 }
 .navbar_bottom{
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
+    gap: 1em;
     padding: 10px;
     width: 100%;
-} */
+}
+.navbar a{
+    color: white;
+    text-decoration: none;
+}
+.logo img{
+    width: 100px;
+    height: 100px;
+}
+
+.collection{ /*alle producten*/
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-gap: 1em;
+}
+.collection_product img{ /*image van de producten*/
+    width: auto;
+    height: 40%;
+}
