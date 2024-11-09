@@ -58,12 +58,7 @@
                 return $this->is_admin;
         }
         public function setIs_admin($is_admin){
-            $this->is_admin = $is_admin;
-            if($is_admin ==='on'){
-                $this->is_admin = 1;
-            }else{
-                $this->is_admin = 0;
-            }
+            $this->is_admin = ($is_admin === 'on') ? 1 : 0;
         }
 
         
