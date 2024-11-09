@@ -29,10 +29,10 @@
         $password = $_POST['password'];
 
         if(canLogin($email, $password)){
-            session_start();
+            session_start(); //sessie wordt gestart
             $_SESSION['loggedin'] = true;
-            header('Location: index.php');
-            echo "logged in.";
+            $_SESSION['email']= $email; 
+            header('Location: index.php'); //doorverwijzing naar de indexpagina
         }else{
             $error = true;
         }
@@ -54,7 +54,7 @@
             
             <?php if(isset($error)): ?> 
                 <div class="error">
-                    <p>
+                    <p class="error">
                         Hmm, your e-mail or password must be wrong. Please try again.
                     </p>
                 </div>
