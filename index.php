@@ -16,12 +16,11 @@
     <link rel="stylesheet" href="css/style_index.css">
 </head>
 <body>
+  <?php include_once("nav.inc.php") ?>
   <div class="accessorize">
-    <?php include_once("nav.inc.php") ?>
-
     <div class="collection">
       <?php foreach($products as $key => $p): ?>
-        <a href="product.php?id=<?php echo $key ?>">
+        <a class="collection_link" href="product.php?id=<?php echo $key ?>">
           <div class="collection_product">
             <img src="Moon_Logo.png" alt="<?php echo $p['title'] ?>">
             <div class="product_details">
