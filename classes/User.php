@@ -54,14 +54,27 @@
             return $this;
         }
 
+        public function getIs_admin(){
+                return $this->is_admin;
+        }
+        public function setIs_admin($is_admin){
+            $this->is_admin = $is_admin;
+            if($is_admin ==='on'){
+                $this->is_admin = 1;
+            }else{
+                $this->is_admin = 0;
+            }
+        }
+
         
         public function save (){         
             $conn = Db::getConnection();
 
-            $statement = $conn->prepare("INSERT INTO users(username, email, password, currency_balance, active) VALUES (:username, :email, :password, 1000, 1);"); //accounts toevoegen in de databank
+            $statement = $conn->prepare("INSERT INTO users(username, email, password, is_admin, currency_balance, active) VALUES (:username, :email, :password, :is_admin, 1000, 1);"); //accounts toevoegen in de databank
             $statement->bindValue(":username", $this->getUsername());
             $statement->bindValue(":email", $this->getEmail()); 
             $statement->bindValue(":password", $this->getPassword());
+            $statement->bindValue(":is_admin", $this->getIs_admin(), PDO::PARAM_INT);
 
             return $statement->execute();
 
