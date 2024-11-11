@@ -1,4 +1,6 @@
 <?php
+  session_start();
+
   include_once(__DIR__."/classes/Db.php");
   if(!isset($_GET['id'])){ //als de variabele $_GET['id'] NIET bestaat
     //redirect naar error-pg (header: 'Location(error.php)') --> maar die error-pg bestaat nog niet 
@@ -15,6 +17,14 @@
   }
 
   $product = getProductById($_GET['id']);
+
+
+  // if($_SESSION['loggedin']!== true){
+  //   header('Location: login.php');
+  // }
+  // else{
+  //   $products = Product::getAll();
+  // }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
