@@ -1,10 +1,14 @@
 <?php
     include_once("Db.php");
-
-    //::getAll --> om alle producten op de homepage te kunnen tonen
-    //save();
-
 class Product{
+    private $id;
+    private $title;
+    private $price;
+    private $category_id;
+    private $description;
+    private $color;
+    private $stock_amount;
+
     public function save($title, $price){
         $conn = Db::getConnection();
         $statement = $conn->prepare('INSERT INTO products (title, price) VALUES (:title, :price)');
