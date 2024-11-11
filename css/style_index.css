@@ -98,3 +98,48 @@ body{
 .product img{
     width: 100px;
 }
+
+/* profile.php */
+.profile{
+    width: 100%;
+    max-width: 700px;
+    margin: 5em auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(120, 120, 120, 0.5);
+}
+
+.new_product{
+    background-color: wheat;
+    padding: 20px;
+    margin: 1em auto;
+
+}
+.new_product input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 7px;
+}
+
+.new_product label
+{
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+.addbtn{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: rgb(75, 75, 245);
+    color: white;
+    font-size: larger;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.addbtn:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
