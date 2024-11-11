@@ -2,7 +2,7 @@
   <div class="navbar_top">
     <a href="index.php" class="logo"><img src="Moon_Logo.png" alt="logo"></a>
     <h2>Accessorize</h2>
-    <a href="logout.php" class="navbar__logout">Hey <?php echo htmlspecialchars($_SESSION['email']); ?>, logout?</a>
+    <a href="profile.php" class="navbar__logout">Hello <?php echo htmlspecialchars($_SESSION['email']);?>!</a>
   </div>
 
   <div class="navbar_bottom">
