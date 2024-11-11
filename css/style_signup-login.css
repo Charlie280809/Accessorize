@@ -6,7 +6,6 @@ body{
     background-color: rgb(55, 55, 55);
     font-family: Helvetica, sans-serif;
     color: black;
-
 }
 
 .hidden{
@@ -34,7 +33,7 @@ body{
     border-radius: 10px;
 }
 
-.form__field label
+.form_field label
 {
   display: block;
   margin-bottom: 0.2em;
