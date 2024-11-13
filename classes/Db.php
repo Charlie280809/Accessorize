@@ -1,4 +1,5 @@
 <?php
+    namespace App\Accessorize;
     class Db{
         private static $conn = null;
         public static function getConnection(){
