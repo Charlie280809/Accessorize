@@ -1,34 +1,12 @@
 <?php 
-    include_once(__DIR__."/classes/Db.php");   
-    function canLogin($p_email, $p_password){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email"); //preparen zodat men niet kan sjoemelen met die ':email'
-		$statement->bindValue(":email", $p_email); //':email' binden aan $p_email
-        $statement->execute();
-
-        $user = $statement->fetch(PDO::FETCH_ASSOC); //user linken met de databank
-        if($user){ //als de user gevonden is in de databank 
-			$hash = $user['password']; //hash van user is password uit de databank
-
-			if(password_verify($p_password, $hash)){
-                //als $p_password gelijk is aan $hash
-			     return true;
-			}else{
-				 return false;
-			}
-		}else{
-			//not found
-			return false;
-		}
-
-        //if(User::canLogin($email, $password)){  GO, maak sessie + redirect naar home  }
-    }   
+    include_once(__DIR__."/classes/Db.php");
+    include_once(__DIR__."/classes/User.php");   
 
     if(!empty($_POST)){
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        if(canLogin($email, $password)){
+        if(App\Accessorize\User::canLogin($email, $password)){
             session_start(); //sessie wordt gestart
             $_SESSION['loggedin'] = true;
             $_SESSION['email']= $email; 
