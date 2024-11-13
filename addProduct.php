@@ -24,7 +24,7 @@ include_once(__DIR__."/classes/Product.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessorize Profile</title>
+    <title>Add product</title>
     <link rel="stylesheet" href="css/style_index.css">
 </head>
 <body>
