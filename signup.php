@@ -3,7 +3,7 @@ include_once(__DIR__."/classes/User.php");
 
     if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
         try{
-            $user = new User();
+            $user = new App\Accessorize\Customer();
             $user->setUsername($_POST['username']);
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
