@@ -7,7 +7,6 @@ include_once(__DIR__."/classes/User.php");
             $user->setUsername($_POST['username']);
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
-            $user->setIs_admin($_POST['admin']??'');
             $user->save();
             
             $succes = "User saved";
@@ -54,11 +53,6 @@ include_once(__DIR__."/classes/User.php");
 				<label for="Password">Password</label>
 				<input type="password" name="password">
 			</div>
-
-            <div class="admin">
-                <label for="Admin">Do you want to be an admin?</label>
-                <input type="checkbox" name="admin" title="Being an admin allows you to add, update and delete your own products to the shop.">
-            </div>
 
 			<div>
 				<input type="submit" value="Sign up" class="btn_submit">	
