@@ -7,6 +7,7 @@ include_once(__DIR__."/classes/Product.php");
             $product->setTitle( $_POST['title']);
             $product->setPrice($_POST['price']);
             $product->setDescription($_POST['description']);
+            $product->setCategory_id($_POST['category']); //output: bv. 'rings'
         //    $product->setKeywords($_POST['']);
             $product->setColor( $_POST['color']);
             $product->setStock_amount( $_POST['stock_amount']);
@@ -52,15 +53,15 @@ include_once(__DIR__."/classes/Product.php");
                 <label for="Price">Product price</label>
 				<input type="text" name="price">
 			</div>
-            <!-- <div>					
-                <label for="Email">E-mail</label>
-                /* make dropdown */
-				<input type="dropdown" name="email">
-                <option value="earrings">Earrings</option>
-                <option value="rings">Rings</option>
-                <option value="necklaces">Necklaces</option>
-                <option value="bracelets">Bracelets</option>
-			</div> -->
+            <div>					
+                <label for="category">Choose a category</label>
+                <select name="category" id="category">
+                    <option value="earrings">Earrings</option>
+                    <option value="rings">Rings</option>
+                    <option value="necklaces">Necklaces</option>
+                    <option value="bracelets">Bracelets</option>
+                </select>
+			</div>
             <div>					
                 <label for="Description">Product description</label>
 				<input type="text" name="description">
