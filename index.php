@@ -22,7 +22,7 @@
       <?php foreach($products as $key => $p): ?>
         <a class="collection_link" href="product.php?id=<?php echo $key ?>">
           <div class="collection_product">
-            <img src="Moon_Logo.png" alt="<?php echo $p['title'] ?>">
+            <img src="<?php echo "./" . htmlspecialchars($p['images']); ?>" alt="<?php echo $p['title'] ?>">
             <div class="product_details">
               <p class="product_title"><?php echo $p['title'] ?></p>
               <p class="product_price">€<?php echo $p['price'] ?></p>
