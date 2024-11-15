@@ -1,4 +1,5 @@
 <?php
+  namespace App\Accessorize;
   session_start();
 
   include_once(__DIR__."/classes/Db.php");
@@ -8,7 +9,7 @@
   }
 
   function getProductById($id){
-    $conn = App\Accessorize\Db::getConnection();
+    $conn = Db::getConnection();
     $statement = $conn->prepare('SELECT * FROM products WHERE id = :id');
     $statement->bindParam(':id', $id);
     $statement->execute();
