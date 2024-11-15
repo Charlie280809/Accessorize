@@ -3,13 +3,14 @@ include_once(__DIR__."/classes/User.php");
 
     if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
         try{
-            $user = new App\Accessorize\Customer();
+            $user = new App\Accessorize\User(); //een gewone customer aanmaken, geen admin
             $user->setUsername($_POST['username']);
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
             $user->save();
             
             $succes = "User saved";
+            echo $succes;
         }
         catch(Exception $e){
             $error = $e->getMessage();
