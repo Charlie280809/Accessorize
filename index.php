@@ -1,12 +1,15 @@
 <?php
   include_once(__DIR__."/classes/Product.php"); 
-  session_start();
-  if($_SESSION['loggedin']!== true){
-    header('Location: login.php');
-  }
-  else{
-    $products = Product::getAll();
-  }
+  // session_start();
+  // if($_SESSION['loggedin']!== true){
+  //   header('Location: login.php');
+  // }
+  // else{
+  //   $products = Product::getAll();
+  // }
+  $products = Product::getAll();
+
+  
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +25,7 @@
       <?php foreach($products as $key => $p): ?>
         <a class="collection_link" href="product.php?id=<?php echo $key ?>">
           <div class="collection_product">
-            <img src="<?php echo "./" . htmlspecialchars($p['images']); ?>" alt="<?php echo $p['title'] ?>">
+            <img src="Moon_Logo.png" alt="<?php echo $p['title'] ?>">
             <div class="product_details">
               <p class="product_title"><?php echo $p['title'] ?></p>
               <p class="product_price">€<?php echo $p['price'] ?></p>
