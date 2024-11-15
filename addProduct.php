@@ -30,8 +30,6 @@ include_once(__DIR__."/classes/Product.php");
 <body>
     <?php include_once("nav.inc.php") ?>
     <div class="profile">
-        <!-- <h2>Profile</h2> -->
-        <h4>Hello there, <?php echo htmlspecialchars($_SESSION['email']);?>. You are an admin, which means you can create, update and delete your own products to the shop.</h4>
         
         <form action="" method="post" class="new_product">
 
@@ -79,9 +77,9 @@ include_once(__DIR__."/classes/Product.php");
             </div>
         </form>
             <br>
-        <p>Change password (?)</p>
+        <!-- <p>Change password (?)</p> -->
             <br>
-        <p>Deactivate account (?)</p>
+        <!-- <p>Deactivate account (?)</p> -->
         <a href="logout.php" class="logoutbtn">Log out?</a>
     </div>
 </body>
