@@ -8,11 +8,11 @@
   }
 
   function getProductById($id){
-    $conn = Db::getConnection();
+    $conn = App\Accessorize\Db::getConnection();
     $statement = $conn->prepare('SELECT * FROM products WHERE id = :id');
     $statement->bindParam(':id', $id);
     $statement->execute();
-    $product = $statement->fetch(PDO::FETCH_ASSOC);
+    $product = $statement->fetch(\PDO::FETCH_ASSOC);
     return $product;
   }
 
