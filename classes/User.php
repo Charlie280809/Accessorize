@@ -1,19 +1,16 @@
 <?php
     namespace App\Accessorize;
     include_once("/classes/Db.php");
-    abstract class User { //implements Interfaces\iUser --> nog toevoegen
-        protected $id; //automatisch gegenereerd
-        protected $username; //deze word ingevuld door de gebruiker zelf in de signup
-        protected $email; //deze word ingevuld door de gebruiker zelf in de signup
-        protected $password; //deze word ingevuld door de gebruiker zelf in de signup
-        protected $created_at;
-        protected $updated_at;
-        protected $active = 1; //standaard op 1 (als de gebruiker zich afmeld/het account verwijderd, dan wordt deze 0)
-        protected $street_number;
-        protected $street_name;
-        protected $postal_code;
-        protected $country;
-
+    class User { //implements Interfaces\iUser
+        private $id; //automatisch gegenereerd
+        private $username; //deze word ingevuld door de gebruiker zelf in de signup
+        private $email; //deze word ingevuld door de gebruiker zelf in de signup
+        private $password; //deze word ingevuld door de gebruiker zelf in de signup
+        private $is_admin; //deze word automatisch op 0 gezet, tenzij de gebruiker een admin is
+        private $street_number;
+        private $street_name;
+        private $postal_code;
+        private $country;
 
         public function getUsername(){
             return $this->username;
@@ -25,6 +22,7 @@
             $this->username = $username;
             return $this;
         }
+        
         public function getEmail(){
             return $this->email;
         }
@@ -45,7 +43,7 @@
             }
 
             $options = [
-                'cost' => 10, 
+                'cost' => 12, 
             ];
             $hash = password_hash($password, PASSWORD_DEFAULT, $options); 
 
@@ -54,14 +52,13 @@
         }
 
 
-
         public static function canLogin($p_email, $p_password){
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email"); //preparen zodat men niet kan sjoemelen met die ':email'
             $statement->bindValue(":email", $p_email); //':email' binden aan $p_email
             $statement->execute();
     
-            $user = $statement->fetch(PDO::FETCH_ASSOC); //user linken met de databank
+            $user = $statement->fetch(\PDO::FETCH_ASSOC); //user linken met de databank
             if($user){ //als de user gevonden is in de databank 
                 $hash = $user['password']; //hash van user is password uit de databank
     
@@ -78,13 +75,13 @@
         }   
 
         public function save (){         
-            $conn = \App\Accessorize\Db::getConnection();
+            $conn = Db::getConnection();
 
-            $statement = $conn->prepare("INSERT INTO users(username, email, password, is_admin, currency_balance, active) VALUES (:username, :email, :password, :is_admin, 1000, 1);"); //accounts toevoegen in de databank
+            $statement = $conn->prepare("INSERT INTO users(username, email, password, currency_balance, active) VALUES (:username, :email, :password, 1000, 1);"); //accounts toevoegen in de databank
             $statement->bindValue(":username", $this->getUsername());
             $statement->bindValue(":email", $this->getEmail()); 
             $statement->bindValue(":password", $this->getPassword());
-            $statement->bindValue(":is_admin", $this->getIs_admin(), \PDO::PARAM_INT);
+            // $statement->bindValue(":is_admin", $this->getIs_admin(), \PDO::PARAM_INT);
 
             return $statement->execute();
 
@@ -92,6 +89,17 @@
                 $errorInfo = $statement->errorInfo();
                 throw new Exception("Failed to save user: " . $errorInfo[2]);
             }
+        }
+
+        public static function getUserByEmail($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
+            
+            return $result;
         }
 }
 ?>
