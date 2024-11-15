@@ -7,7 +7,7 @@
   // else{
   //   $products = Product::getAll();
   // }
-  $products = Product::getAll();
+  $products = App\Accessorize\Product::getAll();
 
   
 ?><!DOCTYPE html>

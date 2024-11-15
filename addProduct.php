@@ -3,7 +3,7 @@ include_once(__DIR__."/classes/Product.php");
     session_start();
     if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
         try{
-            $product = new Product();
+            $product = new App\Accessorize\Product();
             $product->setTitle( $_POST['title']);
             $product->setPrice($_POST['price']);
             $product->setDescription($_POST['description']);
