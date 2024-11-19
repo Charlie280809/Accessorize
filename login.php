@@ -2,9 +2,9 @@
     include_once(__DIR__."/classes/Db.php");
     include_once(__DIR__."/classes/User.php");
 
-    if(!empty($_POST)){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+    if(!empty($_POST)){ //als er iets in de post zit
+        $email = $_POST['email']; //de waarde van het email-inputveld
+        $password = $_POST['password']; //de waarde van het password-inputveld
 
         if(App\Accessorize\User::canLogin($email, $password)){
             session_start(); //sessie wordt gestart
