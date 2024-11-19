@@ -7,13 +7,13 @@ include_once(__DIR__."/classes/Product.php");
             $product->setTitle( $_POST['title']);
             $product->setPrice($_POST['price']);
             $product->setDescription($_POST['description']);
-            $product->setCategory_id($_POST['category']); //output: bv. 'rings'
-        //    $product->setKeywords($_POST['']);
+            $product->setCategory_id($_POST['category']);
             $product->setColor( $_POST['color']);
             $product->setStock_amount( $_POST['stock_amount']);
+            
+        //    $product->setKeywords($_POST['']);
             $product->save();
-
-            $succes = "Product saved";
+            $succes = "Product saved!";
         }
         catch(Exception $e){
             $error = $e->getMessage();
@@ -54,10 +54,10 @@ include_once(__DIR__."/classes/Product.php");
             <div>					
                 <label for="category">Choose a category</label>
                 <select name="category" id="category">
-                    <option value="earrings">Earrings</option>
-                    <option value="rings">Rings</option>
-                    <option value="necklaces">Necklaces</option>
-                    <option value="bracelets">Bracelets</option>
+                    <option value="1">Earrings</option>
+                    <option value="2">Rings</option>
+                    <option value="3">Necklaces</option>
+                    <option value="4">Bracelets</option>
                 </select>
 			</div>
             <div>					
@@ -75,6 +75,7 @@ include_once(__DIR__."/classes/Product.php");
             <div>
                 <input type="submit" value="Add new product to shop" class="addbtn">
             </div>
+            <div><?php echo $succes ?></div>
         </form>
             <br>
         <!-- <p>Change password (?)</p> -->
