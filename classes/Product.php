@@ -96,5 +96,14 @@
             $products = $statement->fetchALL(\PDO::FETCH_ASSOC);
             return $products;
         }
+
+        public static function getByCategory($category_id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare('SELECT * FROM products WHERE category_id = :category_id');
+            $statement->bindParam(':category_id', $category_id);
+            $statement->execute();
+            $products = $statement->fetchALL(\PDO::FETCH_ASSOC);
+            return $products;
+        }        
     }
 ?>

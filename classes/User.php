@@ -83,12 +83,13 @@
             $statement->bindValue(":password", $this->getPassword());
             // $statement->bindValue(":is_admin", $this->getIs_admin(), \PDO::PARAM_INT);
 
-            return $statement->execute();
+            $result = $statement->execute();
+            return $result;
 
-            if (!$statement->execute()) {
-                $errorInfo = $statement->errorInfo();
-                throw new Exception("Failed to save user: " . $errorInfo[2]);
-            }
+            // if (!$statement->execute()) {
+            //     $errorInfo = $statement->errorInfo();
+            //     throw new Exception("Failed to save user: " . $errorInfo[2]);
+            // }
         }
 
         public static function getUserByEmail($email){

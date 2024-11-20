@@ -7,10 +7,10 @@
 
   <div class="navbar_bottom">
     <a href="index.php" class="navbar__link">Home</a>
-    <a href="#" class="navbar__link">Earrings</a>
-    <a href="#" class="navbar__link">Rings</a>
-    <a href="#" class="navbar__link">Necklaces</a>
-    <a href="#" class="navbar__link">Bracelets</a>
+    <a href="index.php?category=1" class="navbar__link">Earrings</a>
+    <a href="index.php?category=2" class="navbar__link">Rings</a>
+    <a href="index.php?category=3" class="navbar__link">Necklaces</a>
+    <a href="index.php?category=4" class="navbar__link">Bracelets</a>
     <form class="search" action="" method="get">
       <input type="text" name="search" placeholder="Looking for something?">
     </form>
