@@ -18,8 +18,9 @@
   }
 
   $product = getProductById($_GET['id']);
+  var_dump($_GET['id']);
 
-
+  var_dump($product);
   // if($_SESSION['loggedin']!== true){
   //   header('Location: login.php');
   // }
@@ -37,7 +38,7 @@
   <?php include_once("nav.inc.php"); ?>
   <div class="accessorize">
     <div class="product">
-      <img src="Moon_Logo.png" alt="product" >
+      <img src="./images/Schermafbeelding 2024-11-09 234833.png" alt="product" >
       <div class="product_details">
         <p class="product_title"><?php echo $product['title'] ?>
         <p class="product_price"><?php echo '€'.$product['price'] ?></p>
