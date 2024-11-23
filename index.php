@@ -34,7 +34,7 @@
             <img src="Moon_Logo.png" alt="<?php echo htmlspecialchars($p['title']) ?>">
             <div class="product_details">
               <p class="product_title"><?php echo htmlspecialchars($p['title']) ?></p>
-              <p class="product_price">€<?php echo number_format($p['price']) ?></p>
+              <p class="product_price">€<?php echo ($p['price']) ?></p>
             </div>
           </div>
         </a>
