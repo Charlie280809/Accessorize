@@ -28,10 +28,10 @@
   <?php include_once("nav.inc.php") ?>
   <div class="accessorize">
     <div class="collection">
-      <?php foreach($products as $key => $p): ?>
-        <a class="collection_link" href="product.php?id=<?php echo $key ?>">
+      <?php foreach($products as $p): ?>
+        <a class="collection_link" href="product.php?id=<?php echo $p['id'] ?>">
           <div class="collection_product">
-            <img src="Moon_Logo.png" alt="<?php echo htmlspecialchars($p['title']) ?>">
+            <img src="./images/<?php echo $p['thumbnail_url'] ?>.png" alt="<?php echo htmlspecialchars($p['title']) ?>">
             <div class="product_details">
               <p class="product_title"><?php echo htmlspecialchars($p['title']) ?></p>
               <p class="product_price">€<?php echo ($p['price']) ?></p>
