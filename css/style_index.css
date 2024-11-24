@@ -95,15 +95,34 @@ body{
 }
 .collection_product img{ /*image van de producten*/
     width: 10em;
+    height: 10em;
 }
 
 
 /* product.php */
-.product img{
+.product{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 3em auto;
+    gap: 2em;
+}
+.product_thumbnail{
+    width: 300px;
+    height: 300px;
+    /*make sure picture is only*/
+}
+.product_imgs{
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    gap: 1em;
+}
+.product_imgs img{
     width: 100px;
 }
 
-/* profile.php */
+/* AddProduct.php */
 .profile{
     width: 100%;
     max-width: 700px;
@@ -114,10 +133,13 @@ body{
 }
 
 .new_product{
-    background-color: wheat;
+    background-color: rgb(176, 176, 201);
     padding: 20px;
     margin: 1em auto;
-
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 .new_product input{
     width: 100%;
@@ -125,9 +147,15 @@ body{
     margin: 10px 0;
     border-radius: 7px;
 }
+#category{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 7px;
+    font-size: medium;
+}
 
-.new_product label
-{
+.new_product label{
   display: block;
   margin-bottom: 0.2em;
 }

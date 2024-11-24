@@ -10,6 +10,9 @@ include_once(__DIR__."/classes/Product.php");
             $product->setCategory_id($_POST['category']);
             $product->setColor( $_POST['color']);
             $product->setStock_amount( $_POST['stock_amount']);
+            $product->setThumbnailURL( $_POST['thumbnail_url']);
+            $product->setImg1URL( $_POST['img1_url']);
+            $product->setImg2URL( $_POST['img2_url']);
             
         //    $product->setKeywords($_POST['']);
             $product->save();
@@ -69,9 +72,17 @@ include_once(__DIR__."/classes/Product.php");
 				<input type="text" name="color">
 			</div>
             <div>					
-                <label for="Stock_amount">How many do you have in stock? ()</label>
+                <label for="Stock_amount">How many do you have in stock? (Please insert a number)</label>
 				<input type="text" name="stock_amount">
 			</div>
+            <div>
+                <label for="Thumbnail">Add a thumbnail for your product.</label>
+                <input type="text" name="thumbnail_url">
+                <label for="IMG1">Add a second photo for your product. (Optional)</label>
+                <input type="text" name="img1_url">
+                <label for="IMG2">Add a third photo for your product. (Optional)</label>
+                <input type="text" name="img2_url">
+            </div>
             <div>
                 <input type="submit" value="Add new product to shop" class="addbtn">
             </div>

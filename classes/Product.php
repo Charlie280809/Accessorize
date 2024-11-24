@@ -9,6 +9,10 @@
         private $description;
         private $color;
         private $stock_amount;
+        private $created_by; /*NOG WERKENDE MAKEN*/
+        private $thumbnail_url;
+        private $img1_url;
+        private $img2_url;
 
         public function getTitle(){
             return $this->title;
@@ -48,7 +52,7 @@
         }
         public function setDescription($description){
             if(empty($description)){ //als de beschrijving leeg is
-                throw new \Exception("Please fill in a description for you product.");
+                throw new \Exception("Please fill in a description for your product.");
             }
             $this->description = $description;
             return $this;
@@ -74,18 +78,47 @@
             }
             $this->stock_amount = $stock_amount;
             return $this;
-        }  
+        }
+
+        public function getThumbnailURL(){
+            return $this->thumbnail_url;
+        }
+        public function setThumbnailURL($thumbnail_url){
+            if(empty($thumbnail_url)){ //als de beschrijving leeg is
+                throw new \Exception("Please add photo for your product.");
+            }
+            $this->thumbnail_url = $thumbnail_url;
+            return $this;
+        }
+
+        public function getImg1URL(){
+            return $this->img1_url;
+        }
+        public function setImg1URL($img1_url){
+            $this->img1_url = $img1_url;
+            return $this;
+        }
+
+        public function getImg2URL(){
+            return $this->img2_url;
+        }
+        public function setImg2URL($img2_url){
+            $this->img2_url = $img2_url;
+            return $this;
+        }
         
         public function save(){
             $conn = Db::getConnection();
-            $statement = $conn->prepare('INSERT INTO products (title, price, category_id, description, stock_amount, color) VALUES (:title, :price, :category_id, :description, :stock_amount, :color)');
+            $statement = $conn->prepare('INSERT INTO products (title, price, category_id, description, stock_amount, color, thumbnail_url, img1_url, img2_url) VALUES (:title, :price, :category_id, :description, :stock_amount, :color, :thumbnail_url, :img1_url, :img2_url)');
             $statement->bindParam(':title', $this->title);
             $statement->bindParam(':price', $this->price);
             $statement->bindParam(':category_id', $this->category_id);
-
             $statement->bindParam(':description', $this->description);
             $statement->bindParam(':stock_amount', $this->stock_amount);
             $statement->bindParam(':color', $this->color);
+            $statement->bindParam(':thumbnail_url', $this->thumbnail_url);
+            $statement->bindParam(':img1_url', $this->img1_url);
+            $statement->bindParam(':img2_url', $this->img2_url);
             return $statement->execute();
         }
 
