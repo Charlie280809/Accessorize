@@ -2,6 +2,7 @@
   include_once(__DIR__."/classes/Db.php");
   include_once(__DIR__."/classes/Product.php"); 
   session_start();
+
   if($_SESSION['loggedin']!== true){ //om een of andere reden kan men gewoon de url ingeven en binnenraken :/
     header('Location: login.php');
   }
@@ -14,6 +15,7 @@
     }  
   }
 
+  var_dump($_SESSION['role']);
 
   
 ?><!DOCTYPE html>
@@ -41,6 +43,9 @@
       <?php endforeach; ?>
     </div>
   </div>
-  <a href="addProduct.php">product toevoegen hier</a> <!-- deze mag eigenlijk enkel zichtbaar zijn voor admins -->
-</body>
+  
+  <?php if($_SESSION['role'] == 1): ?>
+    <a href="addProduct.php">product toevoegen hier</a>
+  <?php endif; ?>
+  </body>
 </html>

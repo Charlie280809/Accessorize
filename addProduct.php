@@ -1,6 +1,7 @@
 <?php
 include_once(__DIR__."/classes/Product.php");
-    session_start();
+session_start();
+if($_SESSION['role']== 1){
     if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
         try{
             $product = new App\Accessorize\Product();
@@ -22,6 +23,9 @@ include_once(__DIR__."/classes/Product.php");
             $error = $e->getMessage();
         }
     }
+}else{
+    header('Location: index.php');
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

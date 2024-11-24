@@ -74,6 +74,16 @@
             }
         }   
 
+        public static function getRole($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT is_admin FROM users WHERE email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
+            
+            return $result['is_admin'];
+        }
+
         public function save (){         
             $conn = Db::getConnection();
 
