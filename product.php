@@ -18,6 +18,9 @@
   }
 
   $product = getProductById($_GET['id']);
+
+  // $reviews = Review::getAllReviewsByProductId($_GET['id']);
+  // var_dump($reviews);
   
 ?><!DOCTYPE html>
 <html lang="en">
@@ -42,15 +45,31 @@
         <p class="product_stock"><?php echo 'Stock: '.$product['stock_amount'] .' pieces left' ?></p>
         <p class="product_color"><?php echo 'Color: '.$product['color'] ?></p>
         <p class="product_creator"><?php echo 'created by '.$product['created_by'] ?></p>
-        <!-- <p class="creation_date"><?php //echo 'created at '.$product['created_at'] ?></p> -->
         <!-- <p class="update_date"><?php //echo 'updated at ' .$product['updated_at'] ?></p> -->
       </div>
     </div>
+
+    <div class="reviews">
+      <div class="reviews_form">
+        <p class="error hidden">You have to have bought this item before leaving a review on it!</p>
+        <input type="text" id="review_content" placeholder="Leave a review here">
+        <a href="#" class="btn" id="addReviewbtn" data-productid="<?php //echo $product['id']; ?> 16">Add review</a>
+      </div>
+    
+      <ul class="reviews_list">
+        <?php //foreach($reviews as $r): ?>
+          <li><?php //echo $c['content'] ?></li>
+          <li>dees is ne comment</li>
+        <?php //endforeach; ?>
+      </ul>
+    </div>
+  </div>
 
   <!--<form action="" method="post">
     <input type="hidden" name="collectionId" value="<?php //echo $id ?>">
     <input class="btn btn--primary" name="btnAdd" type="submit" value="Add to cart">
     </form>-->
 </div>
+<script src="review.js"></script>
 </body>
 </html>
