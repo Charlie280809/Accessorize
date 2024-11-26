@@ -1,8 +1,9 @@
 <?php
   namespace App\Accessorize;
   session_start();
-
   include_once(__DIR__."/classes/Db.php");
+
+  include_once(__DIR__."/classes/Review.php");
   if(!isset($_GET['id'])){ //als de variabele $_GET['id'] NIET bestaat
     //redirect naar error-pg (header: 'Location(error.php)') --> maar die error-pg bestaat nog niet 
     exit("Product not found");
@@ -18,10 +19,8 @@
   }
 
   $product = getProductById($_GET['id']);
+  $allReviews = Review::getAllReviewsByProductId($_GET['id']);
 
-  // $reviews = Review::getAllReviewsByProductId($_GET['id']);
-  // var_dump($reviews);
-  
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,14 +52,13 @@
       <div class="reviews_form">
         <p class="error hidden">You have to have bought this item before leaving a review on it!</p>
         <input type="text" id="review_content" placeholder="Leave a review here">
-        <a href="#" class="btn" id="addReviewbtn" data-productid="<?php //echo $product['id']; ?> 16">Add review</a>
+        <a href="#" class="btn" id="addReviewbtn" data-productid="<?php echo $product['id']; ?> ">Add review</a>
       </div>
     
       <ul class="reviews_list">
-        <?php //foreach($reviews as $r): ?>
-          <li><?php //echo $c['content'] ?></li>
-          <li>dees is ne comment</li>
-        <?php //endforeach; ?>
+        <?php foreach($allReviews as $r): ?>
+          <li><?php echo $r['content'] ?></li>
+        <?php endforeach; ?>
       </ul>
     </div>
   </div>
