@@ -84,24 +84,29 @@
             return $result['is_admin'];
         }
 
+        // public function save (){         
+        //     $conn = Db::getConnection();
+
+        //     $statement = $conn->prepare("INSERT INTO users(username, email, password, currency_balance, active) VALUES (:username, :email, :password, 1000, 1);"); //accounts toevoegen in de databank
+        //     $statement->bindValue(":username", $this->getUsername());
+        //     $statement->bindValue(":email", $this->getEmail()); 
+        //     $statement->bindValue(":password", $this->getPassword());
+
+        //     $result = $statement->execute();
+        //     return $result;
+        // }
+
         public function save (){         
             $conn = Db::getConnection();
 
-            $statement = $conn->prepare("INSERT INTO users(username, email, password, currency_balance, active) VALUES (:username, :email, :password, 1000, 1);"); //accounts toevoegen in de databank
+            $statement = $conn->prepare("INSERT INTO users(username, email, password, is_admin) VALUES (:username, :email, :password, 0);"); //accounts toevoegen in de databank
             $statement->bindValue(":username", $this->getUsername());
             $statement->bindValue(":email", $this->getEmail()); 
             $statement->bindValue(":password", $this->getPassword());
-            // $statement->bindValue(":is_admin", $this->getIs_admin(), \PDO::PARAM_INT);
 
             $result = $statement->execute();
             return $result;
-
-            // if (!$statement->execute()) {
-            //     $errorInfo = $statement->errorInfo();
-            //     throw new Exception("Failed to save user: " . $errorInfo[2]);
-            // }
         }
-
         public static function getUserByEmail($email){
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
