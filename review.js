@@ -1,5 +1,5 @@
-document.querySelector("#addReviewbtn").addEventListener("click", function() {
-    // alert("Review toegevoegd"); //de alert werkt WEL
+document.querySelector("#addReviewbtn").addEventListener("click", function(event) {
+    event.preventDefault();
 
     let productId = this.dataset.productid;
     let content = document.querySelector("#review_content").value;
