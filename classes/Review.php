@@ -47,8 +47,8 @@
             $statement = $conn->prepare("SELECT * FROM reviews WHERE product_id = :product_id");
             $statement->bindValue(":product_id", $product_id);
             $statement->execute();
-            $reviews = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            return $reviews;
+            $statement->execute();
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
         }
     }
 ?>
