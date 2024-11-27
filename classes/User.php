@@ -1,12 +1,13 @@
 <?php
     namespace App\Accessorize;
-    include_once("/classes/Db.php");
+    include_once(__DIR__."/Db.php");
     class User { //implements Interfaces\iUser
         private $id; //automatisch gegenereerd
         private $username; //deze word ingevuld door de gebruiker zelf in de signup
         private $email; //deze word ingevuld door de gebruiker zelf in de signup
         private $password; //deze word ingevuld door de gebruiker zelf in de signup
         private $is_admin; //deze word automatisch op 0 gezet, tenzij de gebruiker een admin is
+        private $currency_balance; //deze word automatisch op 1000 gezet
         private $street_number;
         private $street_name;
         private $postal_code;
@@ -50,7 +51,34 @@
             $this->password = $hash;
             return $this;
         }
+        public function getCurrency_balance(){
+            return $this->currency_balance;
+        }
+        public function setCurrency_balance($currency_balance){
+            $this->currency_balance = $currency_balance;
+            return $this;
+        }
+        public static function getCurrencyBalanceByEmail($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT currency_balance FROM users WHERE email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
+            return $result['currency_balance'];
+        }
+
+        public function save (){         
+            $conn = Db::getConnection();
+
+            $statement = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password);"); 
+            $statement->bindValue(":username", $this->getUsername());
+            $statement->bindValue(":email", $this->getEmail()); 
+            $statement->bindValue(":password", $this->getPassword());
+
+            $result = $statement->execute();
+            return $result;
+        }
 
         public static function canLogin($p_email, $p_password){
             $conn = Db::getConnection();
@@ -72,7 +100,7 @@
                 //not found
                 return false;
             }
-        }   
+        }
 
         public static function getRole($email){
             $conn = Db::getConnection();
@@ -84,29 +112,6 @@
             return $result['is_admin'];
         }
 
-        // public function save (){         
-        //     $conn = Db::getConnection();
-
-        //     $statement = $conn->prepare("INSERT INTO users(username, email, password, currency_balance, active) VALUES (:username, :email, :password, 1000, 1);"); //accounts toevoegen in de databank
-        //     $statement->bindValue(":username", $this->getUsername());
-        //     $statement->bindValue(":email", $this->getEmail()); 
-        //     $statement->bindValue(":password", $this->getPassword());
-
-        //     $result = $statement->execute();
-        //     return $result;
-        // }
-
-        public function save (){         
-            $conn = Db::getConnection();
-
-            $statement = $conn->prepare("INSERT INTO users(username, email, password, is_admin) VALUES (:username, :email, :password, 0);"); //accounts toevoegen in de databank
-            $statement->bindValue(":username", $this->getUsername());
-            $statement->bindValue(":email", $this->getEmail()); 
-            $statement->bindValue(":password", $this->getPassword());
-
-            $result = $statement->execute();
-            return $result;
-        }
         public static function getUserByEmail($email){
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
