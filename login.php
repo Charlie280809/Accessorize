@@ -10,6 +10,7 @@
             session_start(); //sessie wordt gestart
             $_SESSION['loggedin'] = true;
             $_SESSION['email']= $email;
+            $_SESSION['currency_balance'] = App\Accessorize\User::getCurrencyBalanceByEmail($email);
             $_SESSION['role'] = App\Accessorize\User::getRole($email);
             header('Location: index.php'); //doorverwijzing naar de indexpagina
         }else{

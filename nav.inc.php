@@ -2,7 +2,12 @@
   <div class="navbar_top">
     <a href="index.php" class="logo"><img src="Moon_Logo.png" alt="logo"></a>
     <h2>Accessorize</h2>
-    <a href="logout.php" class="navbar__logout">Hello <?php echo htmlspecialchars($_SESSION['email']);?>!</a>
+    <div>
+      <a href="logout.php" class="navbar__logout">Hello <?php echo htmlspecialchars($_SESSION['email']);?>!</a>
+      <?php if($_SESSION['role'] == 0): ?> 
+        <p><?php echo 'Your balance: €'.htmlspecialchars($_SESSION['currency_balance']); ?></p>
+      <?php endif; ?>
+    </div>
   </div>
 
   <div class="navbar_bottom">
