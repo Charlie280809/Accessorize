@@ -3,7 +3,7 @@
   include_once(__DIR__."/classes/Product.php"); 
   session_start();
 
-  if($_SESSION['loggedin']!== true){ //om een of andere reden kan men gewoon de url ingeven en binnenraken :/
+  if($_SESSION['loggedin']!== true){
     header('Location: login.php');
   }
   else{
