@@ -7,7 +7,7 @@
             "password" => "TvRgb4yURr.b-7B",
             "host" => "accessorize.mysql.database.azure.com",
             "db" => "accessorize",
-            "ssl_ca" => __DIR__ . "./DigiCertGlobalRootG2.crt.pem"
+            "ssl_ca" => __DIR__ . "./cacert.pem"
 
         ];
         public static function getConnection(){
