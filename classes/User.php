@@ -122,5 +122,13 @@
             
             return $result;
         }
+
+        public static function changePassword($email, $new_password){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE users SET password = :password WHERE email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->bindValue(":password", $new_password);
+            $statement->execute();
+        }
 }
 ?>

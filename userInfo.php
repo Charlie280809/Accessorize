@@ -8,13 +8,35 @@
     }
     else{
         $user = App\Accessorize\User::getUserByEmail($_SESSION['email']);
+        
+        if(!empty($_POST)){
+            $currentPassword = $_POST['current_password'];
+            $newPassword = $_POST['new_password'];
+            $confirmPassword = $_POST['confirm_password'];
+
+            if(empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
+                $error = "Please fill in all fields.";
+            }elseif($newPassword !== $confirmPassword) {
+                $error = "Your new passwords do not match.";
+            }else{
+                if (!password_verify($currentPassword, $user['password'])) {
+                    $error = "Your current password is incorrect.";
+                } else {
+                    $options = ['cost' => 12];
+                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT, $options);
+        
+                    App\Accessorize\User::changePassword($_SESSION['email'], $hashedPassword);
+                    $succes = "New password saved!";
+                }
+            }
+        }        
     }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($_SESSION['email']). ' details'?></title>
+    <title><?php echo $user['username']. ' details'?></title>
     <link rel="stylesheet" href="css/style_index.css">
 </head>
 <body>
@@ -22,43 +44,34 @@
     <div class="profile">
         
         <div class="change_password">
-            <form action="" method="post" class="new_product">
+            <form action="" method="post">
             <h3>Change password?</h3>
+            
+                <?php if(isset($error)): ?> 
+                    <div class="error">
+                        <p class="error">
+                            <?php echo $error; ?>
+                        </p>
+                    </div>
+                <?php endif; ?>
+    
+            <div><?php echo $succes ?></div>
 
             <div>					
-                <label for="Oldassword">Enter your current password</label>
+                <label for="Oldpassword">Enter your current password</label>
 				<input type="text" name="current_password">
 							
                 <label for="NewPassword">Enter your new password</label>
 				<input type="text" name="new_password">
+
+                <label for="confirmPassword">Enter your new password</label>
+				<input type="text" name="confirm_password">
 			
                 <input type="submit" value="Change my password" class="changebtn">
             </div>
         </div>
 
-            <!-- <div>
-                <?php //if(isset($error)): ?> 
-                    <div class="error">
-                        <p class="error">
-                            <?php //echo $error; ?>
-                        </p>
-                    </div>
-                <?php //endif; ?>
-            </div> -->
             
-
-            
-            <!-- <div>					
-                <label for="category">Choose a category</label>
-                <select name="category" id="category">
-                    <option value="1">Earrings</option>
-                    <option value="2">Rings</option>
-                    <option value="3">Necklaces</option>
-                    <option value="4">Bracelets</option>
-                </select>
-			</div> -->
-    
-            <div><?php echo $succes ?></div>
         </form>
             <br>
         <!-- <p>Change password (?)</p> -->
