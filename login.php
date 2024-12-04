@@ -9,7 +9,8 @@
         if(App\Accessorize\User::canLogin($email, $password)){
             session_start(); //sessie wordt gestart
             $_SESSION['loggedin'] = true;
-            $_SESSION['email']= $email;
+            $_SESSION['email'] = $email;
+            // $_SESSION['username'] = App\Accessorize\User::getUserByEmail($email);
             $_SESSION['currency_balance'] = App\Accessorize\User::getCurrencyBalanceByEmail($email);
             $_SESSION['role'] = App\Accessorize\User::getRole($email);
             header('Location: index.php'); //doorverwijzing naar de indexpagina
