@@ -45,6 +45,15 @@
         <p class="product_color"><?php echo 'Color: '.$product['color'] ?></p>
         <p class="product_creator"><?php echo 'created by '.$product['created_by'] ?></p>
         <!-- <p class="update_date"><?php //echo 'updated at ' .$product['updated_at'] ?></p> -->
+
+        <form class="addProductToCart" action="cart.php" method="post">
+          <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+          <input type="hidden" name="product_name" value="<?php echo $product['title']; ?>">
+          <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
+          <label for="quantity">Quantity:</label>
+          <input type="number" name="quantity" id="quantity" value="1" min="1">
+          <button type="submit" name="add_to_cart">Add to Cart</button>
+        </form>
       </div>
     </div>
 
