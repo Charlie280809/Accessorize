@@ -75,6 +75,8 @@
         public function setStock_amount($stock_amount){
             if(empty($stock_amount)){
                 throw new \Exception("Please fill in the product's stock amount.");
+            }else if($stock_amount <= 0.00){
+                throw new \Exception("Your stock can't be negative!");
             }
             $this->stock_amount = $stock_amount;
             return $this;
