@@ -3,15 +3,17 @@
   include_once(__DIR__."/classes/Product.php"); 
   session_start();
 
-  if($_SESSION['loggedin']!== true){
-    header('Location: login.php');
+  if($_SESSION['loggedin']!== true){ //als de gebruiker niet is ingelogd
+    header('Location: login.php'); //terug naar de loginpagina
   }
   else{
+      // $user = App\Accessorize\User::getUserByEmail($_SESSION['email']);
+      // var_dump($user); DIT WERKT NIET
     if(empty($_GET['category'])){ //als er geen categorie is geselecteerd
-      $products = App\Accessorize\Product::getAll();
+      $products = App\Accessorize\Product::getAll(); //toon alle producten
     }
     else{
-      $products = App\Accessorize\Product::getByCategory($_GET['category']);
+      $products = App\Accessorize\Product::getByCategory($_GET['category']); //toon producten van de geselecteerde categorie
     }  
   }
 
@@ -42,7 +44,7 @@
     </div>
   </div>
   
-  <?php if($_SESSION['role'] == 1): ?>
+  <?php if($_SESSION['role'] == 1): //als de gerbuiker een admin is ?>
     <a href="addProduct.php">product toevoegen hier</a>
   <?php endif; ?>
   </body>
