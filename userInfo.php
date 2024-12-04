@@ -7,25 +7,25 @@
         header('Location: login.php');
     }
     else{
-        $user = App\Accessorize\User::getUserByEmail($_SESSION['email']);
+        $user = App\Accessorize\User::getUserByEmail($_SESSION['email']); //get user by email
         
-        if(!empty($_POST)){
+        if(!empty($_POST)){ //if the POST is not empty
             $currentPassword = $_POST['current_password'];
             $newPassword = $_POST['new_password'];
             $confirmPassword = $_POST['confirm_password'];
 
             if(empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
-                $error = "Please fill in all fields.";
+                $error = "Please fill in all fields."; //check if fields are empty
             }elseif($newPassword !== $confirmPassword) {
-                $error = "Your new passwords do not match.";
+                $error = "Your new passwords do not match."; //check if new passwords match
             }else{
                 if (!password_verify($currentPassword, $user['password'])) {
-                    $error = "Your current password is incorrect.";
+                    $error = "Your current password is incorrect."; //check if current password is correct
                 } else {
                     $options = ['cost' => 12];
-                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT, $options);
+                    $hash = password_hash($newPassword, PASSWORD_DEFAULT, $options);
         
-                    App\Accessorize\User::changePassword($_SESSION['email'], $hashedPassword);
+                    App\Accessorize\User::changePassword($_SESSION['email'], $hash);
                     $succes = "New password saved!";
                 }
             }
@@ -48,11 +48,7 @@
             <h3>Change password?</h3>
             
                 <?php if(isset($error)): ?> 
-                    <div class="error">
-                        <p class="error">
-                            <?php echo $error; ?>
-                        </p>
-                    </div>
+                    <p class="error"><?php echo $error; ?></p>
                 <?php endif; ?>
     
             <div><?php echo $succes ?></div>
