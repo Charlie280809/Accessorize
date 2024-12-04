@@ -10,6 +10,9 @@
         <p><?php echo 'Your balance: €'.htmlspecialchars($_SESSION['currency_balance']); ?></p>
       <?php endif; ?>
       <div>
+        <a href="cart.php" class="navbar__logout">Cart🛒</a>
+      </div>
+      <div>
         <a href="logout.php" class="navbar__logout">Logout</a>
       </div>
     </div>
