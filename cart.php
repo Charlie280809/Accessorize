@@ -48,15 +48,15 @@ $totalPrice = 0;
 foreach ($_SESSION['cart'] as $item) {
     $totalPrice += $item['price'] * $item['quantity'];
 }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
+?><!DOCTYPE html>
+<lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
+    <link rel="stylesheet" href="css/style_index.css">
 </head>
 <body>
+    <?php include_once("nav.inc.php"); ?>
     <h1>Your Cart</h1>
     <?php if (empty($_SESSION['cart'])): ?>
         <p>Your cart is empty.</p>
