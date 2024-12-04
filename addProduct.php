@@ -92,11 +92,6 @@ if($_SESSION['role']== 1){
             </div>
             <div><?php echo $succes ?></div>
         </form>
-            <br>
-        <!-- <p>Change password (?)</p> -->
-            <br>
-        <!-- <p>Deactivate account (?)</p> -->
-        <a href="logout.php" class="logoutbtn">Log out?</a>
     </div>
 </body>
 </html>
