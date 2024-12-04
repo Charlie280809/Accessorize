@@ -9,19 +9,7 @@ include_once(__DIR__."/classes/User.php");
             $user->setPassword($_POST['password']);
             
             $user->save();
-            
-            // header('Location: index.php');
-            //AANPASSEN!!! hieronder
-            if(App\Accessorize\User::canLogin($email, $password)){
-                session_start(); //sessie wordt gestart
-                $_SESSION['loggedin'] = true;
-                $_SESSION['email']= $email;
-                $_SESSION['currency_balance'] = App\Accessorize\User::getCurrencyBalanceByEmail($email);
-                $_SESSION['role'] = App\Accessorize\User::getRole($email);
-                header('Location: index.php'); //doorverwijzing naar de indexpagina
-            }
-        
-
+            header('Location: login.php'); //doorverwijzing naar de loginpagina
         }
         catch(Exception $e){
             $error = $e->getMessage();
@@ -68,6 +56,7 @@ include_once(__DIR__."/classes/User.php");
 				<input type="submit" value="Sign up" class="btn_submit">	
 			</div>
 
+            <p><small>After a successful signup, you will be redirected to the login-page.</small></p>
             <p>Already have an account? <a href="login.php">Login here!</a></p>
 
         </form>
