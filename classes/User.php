@@ -68,8 +68,22 @@
             return $result['currency_balance'];
         }
 
+        public static function emailExists($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT COUNT(*) AS count FROM users WHERE email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
+            
+            return $result['count'] > 0;
+        }
+
         public function save (){         
             $conn = Db::getConnection();
+
+            if (self::emailExists($this->getEmail())) {
+                throw new \Exception("This email address is already in use. Please use a different one.");
+            }
 
             $statement = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password);"); 
             $statement->bindValue(":username", $this->getUsername());
