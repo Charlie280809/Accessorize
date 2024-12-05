@@ -68,7 +68,7 @@ foreach ($_SESSION['cart'] as $item) {
                     <div class="cart-column">Price</div>
                     <div class="cart-column">Quantity</div>
                     <div class="cart-column">Subtotal</div>
-                    <div class="cart-column">Action</div>
+                    <div class="cart-column">Remove items</div>
                 </div>
 
                 <div class="cart-body">
@@ -91,7 +91,7 @@ foreach ($_SESSION['cart'] as $item) {
                 </div>
             </div>
             <form action="checkout.php" method="post">
-                <button type="submit" name="checkout">Checkout</button>
+                <button type="submit" name="checkout">Buy all items in cart</button>
             </form>
         <?php endif; ?>
     </div>
