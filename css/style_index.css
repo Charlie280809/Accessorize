@@ -192,3 +192,54 @@ body{
     margin: 10px 0;
     border-radius: 7px;
 }
+
+/* cart.php */
+.cart {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.cart-header, .cart-row, .cart-footer {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding: 0.5em 0;
+}
+
+.cart-header {
+    font-weight: bold;
+    background-color: rgb(220, 220, 220);
+}
+
+.cart-footer {
+    border-top: 2px solid #333;
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+.cart-column {
+    flex: 1;
+    text-align: left;
+    padding: 4px 8px;
+}
+
+.cart-column.cart-total-label {
+    text-align: right;
+    flex: 3;
+}
+
+.cart-column.cart-total-value {
+    flex: 1;
+    text-align: left;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.remove-link {
+    color: red;
+    text-decoration: none;
+}
+
+.remove-link:hover {
+    text-decoration: underline;
+}
