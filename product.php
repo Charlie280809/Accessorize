@@ -65,7 +65,7 @@
 
     <div class="reviews">
       <div class="reviews_form">
-        <p class="error hidden">You have to have bought this item before leaving a review on it!</p>
+        <!-- <p class="error hidden">You have to have bought this item before leaving a review on it!</p> -->
         <input type="text" id="review_content" placeholder="Leave a review here">
         <a href="#" class="btn" id="addReviewbtn" data-productid="<?php echo $product['id']; ?> ">Add review</a>
       </div>
@@ -75,13 +75,8 @@
           <li><?php echo $r['content'] ?></li>
         <?php endforeach; ?>
       </ul>
-    </div>
+    </div> 
   </div>
-
-  <!--<form action="" method="post">
-    <input type="hidden" name="collectionId" value="<?php //echo $id ?>">
-    <input class="btn btn--primary" name="btnAdd" type="submit" value="Add to cart">
-    </form>-->
 </div>
 <script src="review.js"></script>
 </body>
