@@ -6,23 +6,24 @@ if (!isset($_SESSION['cart'])) {
     //make the cart an array
 }
 
-// Voeg een product toe aan de cart
+// add products to cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $productId = $_POST['product_id'];
     $productName = $_POST['product_name'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
+    $thumbnail = $_POST['thumbnail_url'];
 
-    // Controleer of het product al in de cart zit
-    foreach ($_SESSION['cart'] as &$item) {
-        if ($item['id'] === $productId) {
-            $item['quantity'] += $quantity; // Aantal verhogen
+    //if the item is already in the cart
+    foreach ($_SESSION['cart'] as &$item) { //for all the items in the cart
+        if ($item['id'] === $productId) { //if an item with the sam id is already in the cart
+            $item['quantity'] += $quantity; // add another
             header('Location: cart.php');
             exit;
         }
     }
 
-    // Voeg nieuw product toe
+    //add new products to cart
     $_SESSION['cart'][] = [
         'id' => $productId,
         'name' => $productName,
@@ -35,10 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 }
 
 // Verwijder een product uit de cart
-if (isset($_GET['action']) && $_GET['action'] === 'remove' && isset($_GET['id'])) {
-    $_SESSION['cart'] = array_filter($_SESSION['cart'], function ($item) {
-        return $item['id'] !== $_GET['id'];
-    });
+if ($_GET['action'] === 'remove' && isset($_GET['id'])) {
+    $_SESSION['cart'] = array_values(array_filter($_SESSION['cart'], fn($item) => $item['id'] !== $_GET['id']));
     header('Location: cart.php');
     exit;
 }
@@ -57,43 +56,48 @@ foreach ($_SESSION['cart'] as $item) {
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
-    <h1>Your Cart</h1>
-    <?php if (empty($_SESSION['cart'])): ?>
-        <p>Your cart is empty.</p>
-    <?php else: ?>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($_SESSION['cart'] as $item): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($item['name']); ?></td>
-                        <td>€<?= number_format($item['price'], 2); ?></td>
-                        <td><?= $item['quantity']; ?></td>
-                        <td>€<?= number_format($item['price'] * $item['quantity'], 2); ?></td>
-                        <td>
-                            <a href="cart.php?action=remove&id=<?= $item['id']; ?>">Remove</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3">Total</td>
-                    <td>€<?= number_format($totalPrice, 2); ?></td>
-                </tr>
-            </tfoot>
-        </table>
-        <form action="checkout.php" method="post">
-            <button type="submit" name="checkout">Checkout</button>
-        </form>
-    <?php endif; ?>
+
+    <div class="accessorize">
+        <h1>Your Cart</h1>
+        <?php if (empty($_SESSION['cart'])): ?>
+            <p>Your cart is empty.</p>
+        <?php else: ?>
+            <div class="cart">
+                <div class="cart-header">
+                    <div class="cart-column">Product</div>
+                    <div class="cart-column">Price</div>
+                    <div class="cart-column">Quantity</div>
+                    <div class="cart-column">Subtotal</div>
+                    <div class="cart-column">Action</div>
+                </div>
+
+                <div class="cart-body">
+                    <?php foreach ($_SESSION['cart'] as $item): ?>
+                        <div class="cart-row">
+                            <div class="cart-column"><?= htmlspecialchars($item['name']); ?></div>
+                            <div class="cart-column">€<?= number_format($item['price'], 2); ?></div>
+                            <div class="cart-column"><?= $item['quantity']; ?></div>
+                            <div class="cart-column">€<?= number_format($item['price'] * $item['quantity'], 2); ?></div>
+                            <div class="cart-column">
+                                <a href="cart.php?action=remove&id=<?= $item['id']; ?>" class="remove-link">Remove</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="cart-footer">
+                    <div class="cart-column cart-total-label" colspan="3">Total</div>
+                    <div class="cart-column cart-total-value">€<?= number_format($totalPrice, 2); ?></div>
+                </div>
+            </div>
+            <form action="checkout.php" method="post">
+                <button type="submit" name="checkout">Checkout</button>
+            </form>
+        <?php endif; ?>
+    </div>
+
+
+       
+        
 </body>
 </html>
