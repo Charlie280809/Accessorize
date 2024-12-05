@@ -5,7 +5,6 @@
     class Order {
         private $id;
         private $user_id;
-        private $order_date;
         private $total_price;
 
         public function getId(){
@@ -20,14 +19,6 @@
             return $this;
         }
 
-        public function getOrderDate(){
-            return $this->order_date;
-        }
-        public function setOrderDate($order_date){
-            $this->order_date = $order_date;
-            return $this;
-        }
-
         public function getTotalPrice(){
             return $this->total_price;
         }
@@ -38,21 +29,20 @@
     
         public function save() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("INSERT INTO orders (user_id, order_date, total_price) VALUES (:user_id, :order_date, :total_price)");
+            $statement = $conn->prepare("INSERT INTO orders (user_id, total_price) VALUES (:user_id, :total_price)");
             $statement->bindValue(":user_id", $this->getUserId());
-            $statement->bindValue(":order_date", $this->getOrderDate());
             $statement->bindValue(":total_price", $this->getTotalPrice());
             $statement->execute();
-            $this->id = $conn->lastInsertId(); // Bewaar het order-ID
+            $this->id = $conn->lastInsertId();
             return $this->id;
         }
     
-        public static function getOrdersByUserId($user_id) {
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id");
-            $statement->bindValue(":user_id", $user_id);
-            $statement->execute();
-            return $statement->fetchAll(\PDO::FETCH_ASSOC);
-        }
+        // public static function getOrdersByUserId($user_id) {
+        //     $conn = Db::getConnection();
+        //     $statement = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id");
+        //     $statement->bindValue(":user_id", $user_id);
+        //     $statement->execute();
+        //     return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        // }
     }
 ?>

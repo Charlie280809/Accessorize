@@ -47,11 +47,10 @@
     
         public function save() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (:order_id, :product_id, :quantity, :price)");
+            $statement = $conn->prepare("INSERT INTO order_items (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)");
             $statement->bindValue(":order_id", $this->getOrderId());
             $statement->bindValue(":product_id", $this->getProductId());
             $statement->bindValue(":quantity", $this->getQuantity());
-            $statement->bindValue(":price", $this->getPrice());
             $statement->execute();
             $this->id = $conn->lastInsertId();
             return $this->id;
