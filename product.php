@@ -32,11 +32,17 @@
   <?php include_once("nav.inc.php"); ?>
   <div class="accessorize">
     <div class="product">
+    
       <div class="product_imgs">
-        <img src="./images/<?php echo $product['img1_url'] ?>.png" alt=" <?php echo $product['title'] ?>" >
-        <img src="./images/<?php echo $product['img2_url'] ?>.png" alt=" <?php echo $product['title'] ?>" >
+        <?php if($product['img1_url'] !== null): //if img1 exists ?>
+          <img src="./images/<?php echo $product['img1_url'] ?>.png" alt=" <?php echo $product['title'] ?>" >
+        <?php endif; ?>
+        <?php if($product['img2_url'] !== null): //if img2 exists ?>
+          <img src="./images/<?php echo $product['img2_url'] ?>.png" alt=" <?php echo $product['title'] ?>" >
+        <?php endif; ?>
       </div>
-        <img class="product_thumbnail" src="./images/<?php echo $product['thumbnail_url'] ?>.png" alt=" <?php echo $product['title'] ?>" >
+
+      <img class="product_thumbnail" src="./images/<?php echo $product['thumbnail_url'] ?>.png" alt=" <?php echo $product['title'] ?>" >
       <div class="product_details">
         <p class="product_title"><?php echo $product['title'] ?>
         <p class="product_price"><?php echo '€'.$product['price'] ?></p>
