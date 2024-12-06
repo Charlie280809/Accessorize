@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     //if the item is already in the cart
     foreach ($_SESSION['cart'] as &$item) { //for all the items in the cart
         if ($item['id'] === $productId) { //if an item with the sam id is already in the cart
-            $item['quantity'] += $quantity; // add another
+            $item['quantity'] += $quantity; //add another
             header('Location: cart.php');
             exit;
         }
@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     exit;
 }
 
-// Verwijder een product uit de cart
+//remove products from cart
 if ($_GET['action'] === 'remove' && isset($_GET['id'])) {
     $_SESSION['cart'] = array_values(array_filter($_SESSION['cart'], fn($item) => $item['id'] !== $_GET['id']));
     header('Location: cart.php');
     exit;
 }
 
-// Bereken totaalprijs
+//calculate total price
 $totalPrice = 0;
 foreach ($_SESSION['cart'] as $item) {
     $totalPrice += $item['price'] * $item['quantity'];
@@ -94,10 +94,6 @@ foreach ($_SESSION['cart'] as $item) {
                 <button type="submit" name="checkout">Buy all items in cart</button>
             </form>
         <?php endif; ?>
-    </div>
-
-
-       
-        
+    </div>   
 </body>
 </html>
