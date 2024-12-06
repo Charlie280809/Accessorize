@@ -1,4 +1,10 @@
-<nav class="navbar">
+<?php 
+    session_start();
+    include_once(__DIR__."/classes/User.php");
+    include_once(__DIR__."/classes/Db.php");
+
+    $currentUser = App\Accessorize\User::getUserByEmail($_SESSION['email']);
+?><nav class="navbar">
   <div class="navbar_top">
     <a href="index.php" class="logo"><img src="Moon_Logo.png" alt="logo"></a>
     <h2>Accessorize</h2>
@@ -24,8 +30,5 @@
     <a href="index.php?category=2" class="navbar__link">Rings</a>
     <a href="index.php?category=3" class="navbar__link">Necklaces</a>
     <a href="index.php?category=4" class="navbar__link">Bracelets</a>
-    <form class="search" action="" method="get">
-      <input type="text" name="search" placeholder="Looking for something?">
-    </form>
   </div>
 </nav>
