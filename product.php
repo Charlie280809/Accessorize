@@ -2,10 +2,10 @@
   namespace App\Accessorize;
   session_start();
   include_once(__DIR__."/classes/Db.php");
-
   include_once(__DIR__."/classes/Review.php");
+  include_once(__DIR__."/classes/User.php");
+
   if(!isset($_GET['id'])){ //als de variabele $_GET['id'] NIET bestaat
-    //redirect naar error-pg (header: 'Location(error.php)') --> maar die error-pg bestaat nog niet 
     exit("Product not found");
   }
 
@@ -20,6 +20,13 @@
 
   $product = getProductById($_GET['id']);
   $allReviews = Review::getAllReviewsByProductId($_GET['id']);
+
+  $currentUser = User::getUserByEmail($_SESSION['email']);
+  $userId = $currentUser['id'];
+  if(Review::isVerifiedBuyer($userId, $_GET['id'])){ //user is verified to leave a review
+    $showReviewInput = true;
+  }
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -65,9 +72,13 @@
 
     <div class="reviews">
       <div class="reviews_form">
-        <!-- <p class="error hidden">You have to have bought this item before leaving a review on it!</p> -->
-        <input type="text" id="review_content" placeholder="Leave a review here">
-        <a href="#" class="btn" id="addReviewbtn" data-productid="<?php echo $product['id']; ?> ">Add review</a>
+
+        <?php if(isset($showReviewInput)): ?>
+          <input type="text" id="review_content" placeholder="Leave a review here">
+          <a href="#" class="btn" id="addReviewbtn" data-productid="<?php echo $product['id']; ?> ">Add review</a>
+        <?php else: ?>
+         <p> <i>If you want to leave a review, you first have to buy the item</i>😉</p>
+        <?php endif; ?>
       </div>
     
       <ul class="reviews_list">
