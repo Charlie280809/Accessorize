@@ -139,6 +139,24 @@
             $statement->execute();
             $products = $statement->fetchALL(\PDO::FETCH_ASSOC);
             return $products;
-        }        
+        }
+        
+        public static function getById($id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare('SELECT * FROM products WHERE id = :id');
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            $product = $statement->fetch(\PDO::FETCH_ASSOC);
+            return $product;
+        }
+        
+        public static function getByOrderId($order_id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare('SELECT * FROM products WHERE order_id = :order_id');
+            $statement->bindParam(':order_id', $order_id);
+            $statement->execute();
+            $product = $statement->fetch(\PDO::FETCH_ASSOC);
+            return $product;
+        }
     }
 ?>
