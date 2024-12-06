@@ -22,26 +22,34 @@
         $totalPrice = 0;
         foreach ($_SESSION['cart'] as $product) {
             $totalPrice += $product['price'] * $product['quantity'];
+        }     
+
+        if ($userCurrencyBalance >= $totalPrice) { //check if user has enough currency
+           
+            $newBalance = $userCurrencyBalance - $totalPrice;
+            $newBalance = round($newBalance, 2);
+            $currentUser::updateCurrencyBalance($userId, );
+            
+            // create new order
+            $order = new Order();
+            $order->setUserId($userId);
+            $order->setTotalPrice($totalPrice);
+            $order->save();
+
+            // add order to database
+            foreach ($_SESSION['cart'] as $product) {
+                $orderItem = new OrderItem();
+                $orderItem->setOrderId($order->getId());
+                $orderItem->setProductId($product['id']);
+                $orderItem->setQuantity($product['quantity']);
+                $orderItem->save();
+            }
+
+            unset($_SESSION['cart']); //empty cart after checkout
+
+            header('Location: orders.php'); //go to orders
+        } else {
+            echo "You do not have enough currency to complete this purchase.";
         }
-
-        // Maak een nieuwe bestelling
-        $order = new Order();
-        $order->setUserId($userId); // Zorg ervoor dat de gebruiker is ingelogd en een sessie heeft
-        $order->setTotalPrice($totalPrice);
-        $order->save(); // Sla de bestelling op in de database
-
-        // Voeg de items toe aan de bestelling
-        foreach ($_SESSION['cart'] as $product) {
-            $orderItem = new OrderItem();
-            $orderItem->setOrderId($order->getId()); // Koppel aan de zojuist gemaakte bestelling
-            $orderItem->setProductId($product['id']);
-            $orderItem->setQuantity($product['quantity']);
-            $orderItem->save(); // Sla het item op in de database
-        }
-
-        unset($_SESSION['cart']); //empty cart after checkout
-
-        echo "Your order has been placed!";
-        //doorverwijzing naar bestellingen? --> later
     }
 ?>
