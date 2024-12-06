@@ -243,3 +243,11 @@ body{
 .remove-link:hover {
     text-decoration: underline;
 }
+
+/* orders.php */
+.order {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border: 2px solid #333;
+}
