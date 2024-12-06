@@ -4,6 +4,7 @@
     include_once(__DIR__."/classes/Order.php");
     include_once(__DIR__."/classes/OrderItem.php");
     include_once(__DIR__."/classes/User.php");
+    include_once(__DIR__."/classes/Product.php");
     session_start();
 
     if($_SESSION['loggedin']!== true){
@@ -11,16 +12,36 @@
     }
     else{
         $currentUser = User::getUserByEmail($_SESSION['email']);
-        //$orders = Order::getOrdersByUserId($currentUser['id']);
+        $orders = Order::getOrdersByUserId($currentUser['id']);
     }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?php echo $currentUser['username'] .' orders'?></title>
+    <link rel="stylesheet" href="css/style_index.css">
 </head>
 <body>
+    <?php include_once("nav.inc.php") ?>
+    <div class="profile">
+        <h1>Your orders</h1>
+        <?php foreach($orders as $order): ?>
+            <div class="order">
+                <p>Order date: <?php echo $order['order_date'] ?></p>
+                <p>Total price: <?php echo $order['total_price'] ?></p>
+                <p>Items bought:</p>
+                <ul>
+                <?php
+                    $orderItems = OrderItem::getItemsWithProductDetailsByOrderId($order['id']);
+                    foreach ($orderItems as $orderItem): ?>
+                        <li>
+                            <?php echo $orderItem['quantity'] . 'x ' . $orderItem['title'] . ' (' . $orderItem['price'] . ' €)'; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endforeach; ?>
     
 </body>
 </html>
