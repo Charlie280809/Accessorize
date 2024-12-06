@@ -1,6 +1,6 @@
 <?php 
-    include_once(__DIR__."/classes/Db.php");
-    include_once(__DIR__."/classes/User.php");
+    require_once(__DIR__."./classes/Db.php");
+    require_once(__DIR__."./classes/User.php");
 
     if(!empty($_POST)){ //als er iets in de post zit
         $email = $_POST['email']; //de waarde van het email-inputveld
@@ -10,7 +10,6 @@
             session_start(); //sessie wordt gestart
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
-            // $_SESSION['username'] = App\Accessorize\User::getUserByEmail($email);
             $_SESSION['currency_balance'] = App\Accessorize\User::getCurrencyBalanceByEmail($email);
             $_SESSION['role'] = App\Accessorize\User::getRole($email);
             header('Location: index.php'); //doorverwijzing naar de indexpagina
@@ -53,7 +52,6 @@
 
 			<div>
 				<input type="submit" value="Sign in" class="btn_submit">	
-				<!-- <input type="checkbox" id="rememberMe"><label for="rememberMe" class="label__inline">Remember me</label> -->
 			</div>
 
             <p>Don't have an account yet? <a href="signup.php">Create one here!</a></p>
