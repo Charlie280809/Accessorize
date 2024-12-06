@@ -37,12 +37,12 @@
             return $this->id;
         }
     
-        // public static function getOrdersByUserId($user_id) {
-        //     $conn = Db::getConnection();
-        //     $statement = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id");
-        //     $statement->bindValue(":user_id", $user_id);
-        //     $statement->execute();
-        //     return $statement->fetchAll(\PDO::FETCH_ASSOC);
-        // }
+        public static function getOrdersByUserId($user_id) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id");
+            $statement->bindValue(":user_id", $user_id);
+            $statement->execute();
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        }
     }
 ?>
