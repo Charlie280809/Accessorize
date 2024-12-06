@@ -4,7 +4,7 @@
     <h2>Accessorize</h2>
     <div class="user_links">
       <div>
-        <a href="userInfo.php" class="navbar__logout">Profile <?php echo $user['username']; ?></a>
+        <a href="userInfo.php" class="navbar__logout">Profile <?php echo $currentUser['username']; ?></a>
       </div>
       <?php if($_SESSION['role'] == 0): //als de gebruiker geen admin is ?> 
         <p><?php echo 'Your balance: €'.htmlspecialchars($_SESSION['currency_balance']); ?></p>
