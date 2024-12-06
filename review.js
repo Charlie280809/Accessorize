@@ -1,30 +1,27 @@
-document.querySelector("#addReviewbtn").addEventListener("click", function(event) {
-    event.preventDefault();
+document.querySelector("#addReviewbtn").addEventListener("click", function(e) {
+    e.preventDefault();
 
-    let productId = this.dataset.productid;
-    let content = document.querySelector("#review_content").value;
-    
-    let formData = new FormData();
-    formData.append('content', content);
-    formData.append('productId', productId);
+    const productId = e.target.dataset.productid;
+    const reviewContent = document.querySelector("#review_content").value;
 
     fetch("ajax/savereview.php", {
         method: "POST",
-        body: formData
+        body: JSON.stringify({ productId, content: reviewContent }),
+        headers: {
+            "Content-Type": "application/json",
+        },
     })
     .then(response => response.json())
-    .then(result =>{
-        let newReview = document.createElement("li");
-        newReview.innerHTML = result.body;
-        document
-            .querySelector(".reviews_list")
-            .appendChild(newReview);
-
-        document.querySelector("#review_content").value = "";
+    .then(data => {
+        if (data.status === "success") {
+            const reviewsList = document.querySelector(".reviews_list");
+            const newReview = document.createElement("li");
+            newReview.textContent = data.body;
+            reviewsList.appendChild(newReview);
+            document.querySelector("#review_content").value = "";
+        } else {
+            alert(data.message);
+        }
     })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-    
-
+    .catch(err => console.error("Er is een fout opgetreden:", err));
 });
