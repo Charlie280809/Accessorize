@@ -55,14 +55,19 @@
             $this->id = $conn->lastInsertId();
             return $this->id;
         }
-    
-        // public static function getItemsByOrderId($user_id) {
-        //     $conn = Db::getConnection();
-        //     $statement = $conn->prepare("SELECT * FROM order_items WHERE user_id = :user_id");
-        //     $statement->bindValue(":user_id", $user_id);
-        //     $statement->execute();
-        //     return $statement->fetchAll(\PDO::FETCH_ASSOC);
-        // }
+
+        public static function getItemsWithProductDetailsByOrderId($order_id) {
+            $conn = Db::getConnection();
+            // link order_items to products
+            $statement = $conn->prepare("
+                SELECT oi.quantity, p.title, p.price 
+                FROM order_items AS oi
+                INNER JOIN products AS p ON oi.product_id = p.id
+                WHERE oi.order_id = :order_id
+            ");
+            $statement->bindValue(":order_id", $order_id);
+            $statement->execute();
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        }
     }
-    
 ?>
