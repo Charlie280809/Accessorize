@@ -22,8 +22,9 @@
 <body>
     <?php include_once("nav.inc.php") ?>
     <div class="profile">
-        <a href="changePassword.php">Change password</a>
+        <a href="orders.php">View your orders</a>
         <br>
+        <a href="changePassword.php">Change password</a>
         <p>Deactivate account (?)</p>
         <a href="logout.php" class="logoutbtn">Log out?</a>
     </div>
