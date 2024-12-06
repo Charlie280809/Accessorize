@@ -25,6 +25,4 @@ document.querySelector("#addReviewbtn").addEventListener("click", function(event
     .catch(error => {
         console.error('Error:', error);
     });
-    
-
 });
