@@ -73,7 +73,7 @@
     <div class="reviews">
       <div class="reviews_form">
 
-        <?php if(isset($showReviewInput)): ?>
+        <?php if(isset($showReviewInput)): //only verified buyers can leave reviews ?>
           <input type="text" id="review_content" placeholder="Leave a review here">
           <a href="#" class="btn" id="addReviewbtn" data-productid="<?php echo $product['id']; ?> ">Add review</a>
         <?php else: ?>
