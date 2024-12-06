@@ -1,31 +1,30 @@
 <?php
-include_once(__DIR__."/classes/Product.php");
-session_start();
-if($_SESSION['role']== 1){
-    if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
-        try{
-            $product = new App\Accessorize\Product();
-            $product->setTitle( $_POST['title']);
-            $product->setPrice($_POST['price']);
-            $product->setDescription($_POST['description']);
-            $product->setCategory_id($_POST['category']);
-            $product->setColor( $_POST['color']);
-            $product->setStock_amount( $_POST['stock_amount']);
-            $product->setThumbnailURL( $_POST['thumbnail_url']);
-            $product->setImg1URL( $_POST['img1_url']);
-            $product->setImg2URL( $_POST['img2_url']);
-            
-        //    $product->setKeywords($_POST['']);
-            $product->save();
-            $succes = "Product saved!";
+    include_once(__DIR__."/classes/Product.php");
+    session_start();
+
+    if($_SESSION['role']== 1){ //if the user is an admin
+        if(!empty($_POST)){ //is POST is not empty
+            try{
+                $product = new App\Accessorize\Product();
+                $product->setTitle( $_POST['title']);
+                $product->setPrice($_POST['price']);
+                $product->setDescription($_POST['description']);
+                $product->setCategory_id($_POST['category']);
+                $product->setColor( $_POST['color']);
+                $product->setStock_amount( $_POST['stock_amount']);
+                $product->setThumbnailURL( $_POST['thumbnail_url']);
+                $product->setImg1URL( $_POST['img1_url']);
+                $product->setImg2URL( $_POST['img2_url']);
+                $product->save();
+                $succes = "Product saved!";
+            }
+            catch(Exception $e){
+                $error = $e->getMessage();
+            }
         }
-        catch(Exception $e){
-            $error = $e->getMessage();
-        }
+    }else{ //if the user is not an admin
+        header('Location: index.php');
     }
-}else{
-    header('Location: index.php');
-}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,9 +36,7 @@ if($_SESSION['role']== 1){
 <body>
     <?php include_once("nav.inc.php") ?>
     <div class="profile">
-        
         <form action="" method="post" class="new_product">
-
             <div>
                 <?php if(isset($error)): ?> 
                     <div class="error">
@@ -49,7 +46,6 @@ if($_SESSION['role']== 1){
                     </div>
                 <?php endif; ?>
             </div>
-
             <div>					
                 <label for="Title">Product title</label>
 				<input type="text" name="title">
