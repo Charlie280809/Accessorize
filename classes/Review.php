@@ -31,13 +31,33 @@
             return $this;
         }
 
+        public static function isVerifiedBuyer($user_id, $product_id) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("
+                SELECT COUNT(*) AS count
+                FROM orders o
+                INNER JOIN order_items oi ON o.id = oi.order_id
+                WHERE o.user_id = :user_id AND oi.product_id = :product_id
+            ");
+            $statement->bindValue(":user_id", $user_id);
+            $statement->bindValue(":product_id", $product_id);
+            $statement->execute();
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        
+            return $result['count'] > 0; // returns true if user has bought the product
+        }
+
         public function save(){
+            if (!self::isVerifiedBuyer($this->getUserId(), $this->getProductId())) {
+                throw new \Exception("Je moet het product eerst kopen voordat je een review kunt achterlaten.");
+            }
+        
             $conn = Db::getConnection();
             $statement = $conn->prepare("INSERT INTO reviews (user_id, product_id, content) VALUES (:user_id, :product_id, :content)");
             $statement->bindValue(":user_id", $this->getUserId());
             $statement->bindValue(":product_id", $this->getProductId());
             $statement->bindValue(":content", $this->getContent());
-            
+        
             $result = $statement->execute();
             return $result;
         }
@@ -49,6 +69,6 @@
             $statement->execute();
             $statement->execute();
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
-        }
+        }     
     }
 ?>
