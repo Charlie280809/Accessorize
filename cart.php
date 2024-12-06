@@ -1,52 +1,52 @@
 <?php
-session_start();
+    session_start();
 
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-    //make the cart an array
-}
-
-// add products to cart
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    $productId = $_POST['product_id'];
-    $productName = $_POST['product_name'];
-    $price = $_POST['price'];
-    $quantity = $_POST['quantity'];
-    $thumbnail = $_POST['thumbnail_url'];
-
-    //if the item is already in the cart
-    foreach ($_SESSION['cart'] as &$item) { //for all the items in the cart
-        if ($item['id'] === $productId) { //if an item with the sam id is already in the cart
-            $item['quantity'] += $quantity; //add another
-            header('Location: cart.php');
-            exit;
-        }
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+        //make the cart an array
     }
 
-    //add new products to cart
-    $_SESSION['cart'][] = [
-        'id' => $productId,
-        'name' => $productName,
-        'price' => $price,
-        'quantity' => $quantity,
-    ];
+    // add products to cart
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+        $productId = $_POST['product_id'];
+        $productName = $_POST['product_name'];
+        $price = $_POST['price'];
+        $quantity = $_POST['quantity'];
+        $thumbnail = $_POST['thumbnail_url'];
 
-    header('Location: cart.php');
-    exit;
-}
+        //if the item is already in the cart
+        foreach ($_SESSION['cart'] as &$item) { //for all the items in the cart
+            if ($item['id'] === $productId) { //if an item with the sam id is already in the cart
+                $item['quantity'] += $quantity; //add another
+                header('Location: cart.php');
+                exit;
+            }
+        }
 
-//remove products from cart
-if ($_GET['action'] === 'remove' && isset($_GET['id'])) {
-    $_SESSION['cart'] = array_values(array_filter($_SESSION['cart'], fn($item) => $item['id'] !== $_GET['id']));
-    header('Location: cart.php');
-    exit;
-}
+        //add new products to cart
+        $_SESSION['cart'][] = [
+            'id' => $productId,
+            'name' => $productName,
+            'price' => $price,
+            'quantity' => $quantity,
+        ];
 
-//calculate total price
-$totalPrice = 0;
-foreach ($_SESSION['cart'] as $item) {
-    $totalPrice += $item['price'] * $item['quantity'];
-}
+        header('Location: cart.php');
+        exit;
+    }
+
+    //remove products from cart
+    if ($_GET['action'] === 'remove' && isset($_GET['id'])) {
+        $_SESSION['cart'] = array_values(array_filter($_SESSION['cart'], fn($item) => $item['id'] !== $_GET['id']));
+        header('Location: cart.php');
+        exit;
+    }
+
+    //calculate total price
+    $totalPrice = 0;
+    foreach ($_SESSION['cart'] as $item) {
+        $totalPrice += $item['price'] * $item['quantity'];
+    }
 ?><!DOCTYPE html>
 <lang="en">
     <meta charset="UTF-8">
@@ -93,6 +93,9 @@ foreach ($_SESSION['cart'] as $item) {
             <form action="checkout.php" method="post">
                 <button type="submit" name="checkout">Buy all items in cart</button>
             </form>
+            <?php if(isset($error)): //werkt nog niet ?>
+                <p>You do not have enough currency to buy these items.</p>
+            <?php endif; ?>
         <?php endif; ?>
     </div>   
 </body>
