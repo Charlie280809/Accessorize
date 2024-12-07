@@ -1,10 +1,9 @@
 <?php
     namespace App\Accessorize;
-
-    include_once(__DIR__."/../classes/Db.php");
-    include_once(__DIR__."/../classes/Review.php");
-    include_once(__DIR__."/../classes/User.php");
-    session_start();
+    require_once __DIR__.'./bootstrap.php';
+    use App\Accessorize\Db;
+    use App\Accessorize\Review;
+    use App\Accessorize\User;
 
     if(!empty($_POST)) {
         try {
