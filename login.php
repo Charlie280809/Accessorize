@@ -1,18 +1,17 @@
 <?php
     namespace App\Accessorize;
-    require_once __DIR__.'./bootstrap.php';
-    use App\Accessorize\User;
+    require_once __DIR__.'./classes/Db.php';
 
-    if(!empty($_POST)){ //als er iets in de post zit
-        $email = $_POST['email']; //de waarde van het email-inputveld
-        $password = $_POST['password']; //de waarde van het password-inputveld
+    if(!empty($_POST)){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
         if(User::canLogin($email, $password)){
-            session_start(); //sessie wordt gestart
+            session_start(); //start session
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
             $_SESSION['role'] = User::getUserByEmail($email)['is_admin'];
-            header('Location: index.php'); //doorverwijzing naar de indexpagina
+            header('Location: index.php'); //go to index-page
         }else{
             $error = true;
         }
@@ -55,7 +54,6 @@
 			</div>
 
             <p>Don't have an account yet? <a href="signup.php">Create one here!</a></p>
-
         </form>
     </div>
 </body>
