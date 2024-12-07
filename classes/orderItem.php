@@ -1,6 +1,6 @@
 <?php
     namespace App\Accessorize;
-    include_once(__DIR__."/Db.php");
+    require_once __DIR__."./Db.php";
     
     class orderItem {
         private $id;
