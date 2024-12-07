@@ -4,21 +4,21 @@
   use App\Accessorize\Product;
   use App\Accessorize\User;
 
-  if($_SESSION['loggedin']!== true){ //als de gebruiker niet is ingelogd
-    header('Location: login.php'); //terug naar de loginpagina
+  if($_SESSION['loggedin']!== true){
+    header('Location: login.php');
   }
   else{
-      // $user = App\Accessorize\User::getUserByEmail($_SESSION['email']);
-      // var_dump($user); DIT WERKT NIET
-    if(empty($_GET['category'])){ //als er geen categorie is geselecteerd
-      $products = Product::getAll(); //toon alle producten
+    if($_SESSION['role'] == 1){ //user is admin
+      $admin = true;
+    }
+      
+    if(empty($_GET['category'])){ //no category selected --> show all products
+      $products = Product::getAll();
     }
     else{
-      $products = Product::getByCategory($_GET['category']); //toon producten van de geselecteerde categorie
-    }  
+      $products = Product::getByCategory($_GET['category']); //show products by category
+    }
   }
-
-  
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,8 +45,8 @@
     </div>
   </div>
   
-  <?php if($_SESSION['role'] == 1): //als de gerbuiker een admin is ?>
-    <a href="addProduct.php">product toevoegen hier</a>
+  <?php if($admin): ?>
+    <a href="addProduct.php">Add a new product</a>
   <?php endif; ?>
   </body>
 </html>
