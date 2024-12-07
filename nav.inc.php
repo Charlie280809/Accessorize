@@ -11,22 +11,18 @@
     <a href="index.php" class="logo"><img src="Moon_Logo.png" alt="logo"></a>
     <h2>Accessorize</h2>
     <div class="user_links">
-      <div>
-        <a href="userInfo.php" class="navbar__logout">Profile <?php echo $currentUser['username']; ?></a>
-      </div>
-      
-      <?php if($_SESSION['role'] == 0): //als de gebruiker geen admin is ?> 
+      <p><a href="userInfo.php" >Profile <?php echo $currentUser['username']; ?></a></p>
+        
+      <?php if($customer): //als de gebruiker geen admin is ?> 
         <p><?php echo 'Your balance: €'.htmlspecialchars($currentUser['currency_balance']); ?></p>
       <?php endif; ?>
       
       <?php if($customer): ?>
-        <div>
-          <a href="cart.php" class="navbar__logout">Cart🛒</a>
-        </div>
+        <p><a href="cart.php" class="user_links">Cart🛒</a></p>
       <?php endif; ?>
       
       <div>
-        <a href="logout.php" class="navbar__logout">Logout</a>
+        <p><a href="logout.php" class="user_links">Logout</a></p>
       </div>
     </div>
   </div>
