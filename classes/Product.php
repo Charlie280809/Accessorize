@@ -29,19 +29,19 @@
             return $this->price;
         }
         public function setPrice($price){
-            if(empty($price)){ //als de prijs leeg is
+            if(empty($price)){ //if price is empty
                 throw new \Exception("Please fill in a price for your product.");
-            }else if($price <= 0.00){ //als de prijs gelijk of kleiner is dan 0,00
+            }else if($price <= 0.00){ //if price is 0 or negative
                 throw new \Exception("Your price can't be negative!");
             }
             $this->price = $price;
             return $this;
         }
 
-        public function getCategory_id(){ /* MOET NOG FUNCTIONEEL GEMAAKT WORDEN */
+        public function getCategory_id(){
             return $this->category_id;
         }
-        public function setCategory_id($category_id){ /* || */
+        public function setCategory_id($category_id){
             
             $this->category_id = $category_id;
             return $this;
@@ -51,7 +51,7 @@
             return $this->description;
         }
         public function setDescription($description){
-            if(empty($description)){ //als de beschrijving leeg is
+            if(empty($description)){ //if description is empty
                 throw new \Exception("Please fill in a description for your product.");
             }
             $this->description = $description;
@@ -86,7 +86,7 @@
             return $this->thumbnail_url;
         }
         public function setThumbnailURL($thumbnail_url){
-            if(empty($thumbnail_url)){ //als de beschrijving leeg is
+            if(empty($thumbnail_url)){
                 throw new \Exception("Please add photo for your product.");
             }
             $this->thumbnail_url = $thumbnail_url;
