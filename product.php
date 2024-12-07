@@ -65,12 +65,12 @@
             <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
             <label for="quantity">Quantity:</label>
             <input type="number" name="quantity" id="quantity" value="1" min="1">
-            <button type="submit" name="add_to_cart">Add to Cart</button>
+            <button class="addToCartbtn" type="submit" name="add_to_cart">Add to Cart</button>
           </form>
         <?php endif; ?>
 
         <?php if($admin): //only admins can update products ?>
-          <a href="updateProduct.php?id=<?php echo $product['id']; ?>" class="btn">Update product</a>
+          <a href="updateProduct.php?id=<?php echo $product['id']; ?>" class="updateProductbtn">Update product</a>
         <?php endif; ?>
       </div>
     </div>
