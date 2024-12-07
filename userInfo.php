@@ -11,6 +11,10 @@
         $currentUser = User::getUserByEmail($_SESSION['email']);
         //
     }
+
+    if($_SESSION['role'] == 0){
+        $customer = true;
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +26,9 @@
 <body>
     <?php include_once("nav.inc.php") ?>
     <div class="user_info">
-        <a href="orders.php">View your orders</a>
+        <?php if($customer): ?>
+            <a href="orders.php">View your orders</a>
+        <?php endif; ?>
         <br>
         <a href="changePassword.php">Change password</a>
         <br>
