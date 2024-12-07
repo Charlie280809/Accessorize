@@ -1,5 +1,10 @@
 <?php
-    session_start();
+    require_once __DIR__.'./bootstrap.php';
+    use App\Accessorize\Product;
+    use App\Accessorize\User;
+    use App\Accessorize\Order;
+    use App\Accessorize\OrderItem;
+    
 
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];

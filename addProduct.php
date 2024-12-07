@@ -1,11 +1,12 @@
 <?php
-    include_once(__DIR__."/classes/Product.php");
-    session_start();
+    namespace App\Accessorize;
+    require_once __DIR__.'./bootstrap.php';
+    use App\Accessorize\Product;
 
     if($_SESSION['role']== 1){ //if the user is an admin
         if(!empty($_POST)){ //is POST is not empty
             try{
-                $product = new App\Accessorize\Product();
+                $product = new Product();
                 $product->setTitle( $_POST['title']);
                 $product->setPrice($_POST['price']);
                 $product->setDescription($_POST['description']);
@@ -18,7 +19,7 @@
                 $product->save();
                 $succes = "Product saved!";
             }
-            catch(Exception $e){
+            catch(\Exception $e){
                 $error = $e->getMessage();
             }
         }

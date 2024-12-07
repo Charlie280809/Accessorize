@@ -1,7 +1,8 @@
 <?php
-  include_once(__DIR__."/classes/Db.php");
-  include_once(__DIR__."/classes/Product.php"); 
-  session_start();
+  namespace App\Accessorize;
+  require_once __DIR__.'./bootstrap.php';
+  use App\Accessorize\Product;
+  use App\Accessorize\User; 
 
   if($_SESSION['loggedin']!== true){ //als de gebruiker niet is ingelogd
     header('Location: login.php'); //terug naar de loginpagina
@@ -10,10 +11,10 @@
       // $user = App\Accessorize\User::getUserByEmail($_SESSION['email']);
       // var_dump($user); DIT WERKT NIET
     if(empty($_GET['category'])){ //als er geen categorie is geselecteerd
-      $products = App\Accessorize\Product::getAll(); //toon alle producten
+      $products = Product::getAll(); //toon alle producten
     }
     else{
-      $products = App\Accessorize\Product::getByCategory($_GET['category']); //toon producten van de geselecteerde categorie
+      $products = Product::getByCategory($_GET['category']); //toon producten van de geselecteerde categorie
     }  
   }
 

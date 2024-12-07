@@ -1,9 +1,8 @@
 <?php
     namespace App\Accessorize;
-    include_once(__DIR__."/classes/Db.php");
-    include_once(__DIR__."/classes/User.php"); 
-    session_start();
-    
+    require_once __DIR__.'./bootstrap.php';
+    use App\Accessorize\User;
+
     if($_SESSION['loggedin']!== true){
         header('Location: login.php');
     }

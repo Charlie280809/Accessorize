@@ -1,17 +1,18 @@
-<?php 
-    require_once(__DIR__."./classes/Db.php");
-    require_once(__DIR__."./classes/User.php");
+<?php
+    namespace App\Accessorize;
+    require_once __DIR__.'./bootstrap.php';
+    use App\Accessorize\User;
 
     if(!empty($_POST)){ //als er iets in de post zit
         $email = $_POST['email']; //de waarde van het email-inputveld
         $password = $_POST['password']; //de waarde van het password-inputveld
 
-        if(App\Accessorize\User::canLogin($email, $password)){
+        if(User::canLogin($email, $password)){
             session_start(); //sessie wordt gestart
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
-            $_SESSION['currency_balance'] = App\Accessorize\User::getCurrencyBalanceByEmail($email);
-            $_SESSION['role'] = App\Accessorize\User::getRole($email);
+            $_SESSION['currency_balance'] = User::getCurrencyBalanceByEmail($email);
+            $_SESSION['role'] = User::getRole($email);
             header('Location: index.php'); //doorverwijzing naar de indexpagina
         }else{
             $error = true;

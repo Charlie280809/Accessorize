@@ -1,24 +1,14 @@
 <?php
-  namespace App\Accessorize;
-  session_start();
-  include_once(__DIR__."/classes/Db.php");
-  include_once(__DIR__."/classes/Review.php");
-  include_once(__DIR__."/classes/User.php");
+  require_once(__DIR__."./bootstrap.php");
+  use App\Accessorize\Review;
+  use App\Accessorize\User;
 
-  if(!isset($_GET['id'])){ //als de variabele $_GET['id'] NIET bestaat
+  $product = App\Accessorize\Product::getProductById($_GET['id']);
+
+  if(!isset($_GET['id']) == $product){
     exit("Product not found");
   }
 
-  function getProductById($id){
-    $conn = Db::getConnection();
-    $statement = $conn->prepare('SELECT * FROM products WHERE id = :id');
-    $statement->bindParam(':id', $id);
-    $statement->execute();
-    $product = $statement->fetch(\PDO::FETCH_ASSOC);
-    return $product;
-  }
-
-  $product = getProductById($_GET['id']);
   $allReviews = Review::getAllReviewsByProductId($_GET['id']);
 
   $currentUser = User::getUserByEmail($_SESSION['email']);
@@ -27,6 +17,9 @@
     $showReviewInput = true;
   }
 
+  if($_SESSION['role'] == 1){ //if the user is an admin
+    $showUpdatebtn = true;
+  }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -57,7 +50,6 @@
         <p class="product_stock"><?php echo 'Stock: '.$product['stock_amount'] .' pieces left' ?></p>
         <p class="product_color"><?php echo 'Color: '.$product['color'] ?></p>
         <p class="product_creator"><?php echo 'created by '.$product['created_by'] ?></p>
-        <!-- <p class="update_date"><?php //echo 'updated at ' .$product['updated_at'] ?></p> -->
 
         <form class="addProductToCart" action="cart.php" method="post">
           <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
@@ -67,6 +59,10 @@
           <input type="number" name="quantity" id="quantity" value="1" min="1">
           <button type="submit" name="add_to_cart">Add to Cart</button>
         </form>
+
+        <?php if(isset($showUpdatebtn)): //only admins can update products ?>
+          <a href="updateProduct.php?id=<?php echo $product['id']; ?>" class="btn">Update product</a>
+        <?php endif; ?>
       </div>
     </div>
 

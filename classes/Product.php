@@ -1,6 +1,6 @@
 <?php
     namespace App\Accessorize;
-    include_once("Db.php");
+    require_once __DIR__."./Db.php";
     class Product{
         private $id;
         private $title;
@@ -9,7 +9,7 @@
         private $description;
         private $color;
         private $stock_amount;
-        private $created_by; /*NOG WERKENDE MAKEN*/
+        private $created_by;
         private $thumbnail_url;
         private $img1_url;
         private $img2_url;
@@ -108,6 +108,25 @@
             $this->img2_url = $img2_url;
             return $this;
         }
+
+        public function updateById($product_id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare('UPDATE products SET title = :title, price = :price, description = :description, stock_amount = :stock_amount WHERE id = :id');
+            $statement->bindParam(':title', $this->title);
+            $statement->bindParam(':price', $this->price);
+            $statement->bindParam(':description', $this->description);
+            $statement->bindParam(':stock_amount', $this->stock_amount);
+            $statement->bindParam(':id', $product_id);
+            
+            return $statement->execute();
+        }
+
+        public static function deleteById($product_id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare('DELETE FROM products WHERE id = :id');
+            $statement->bindParam(':id', $product_id);
+            return $statement->execute();
+        }
         
         public function save(){
             $conn = Db::getConnection();
@@ -141,7 +160,7 @@
             return $products;
         }
         
-        public static function getById($id){
+        public static function getProductById($id){
             $conn = Db::getConnection();
             $statement = $conn->prepare('SELECT * FROM products WHERE id = :id');
             $statement->bindParam(':id', $id);

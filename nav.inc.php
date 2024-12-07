@@ -1,9 +1,8 @@
-<?php 
-    session_start();
-    include_once(__DIR__."/classes/User.php");
-    include_once(__DIR__."/classes/Db.php");
-
-    $currentUser = App\Accessorize\User::getUserByEmail($_SESSION['email']);
+<?php
+  namespace App\Accessorize;
+  require_once __DIR__.'./bootstrap.php';
+  use App\Accessorize\User;
+    $currentUser = User::getUserByEmail($_SESSION['email']);
 ?><nav class="navbar">
   <div class="navbar_top">
     <a href="index.php" class="logo"><img src="Moon_Logo.png" alt="logo"></a>

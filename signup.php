@@ -1,9 +1,11 @@
 <?php
-include_once(__DIR__."/classes/User.php");
+    namespace App\Accessorize;
+    require_once __DIR__.'./bootstrap.php';
+    use App\Accessorize\User;
 
     if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
         try{
-            $user = new App\Accessorize\User();
+            $user = new User();
             $user->setUsername($_POST['username']);
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
@@ -11,7 +13,7 @@ include_once(__DIR__."/classes/User.php");
             $user->save();
             header('Location: login.php'); //doorverwijzing naar de loginpagina
         }
-        catch(Exception $e){
+        catch(\Exception $e){
             $error = $e->getMessage();
         }
     }
