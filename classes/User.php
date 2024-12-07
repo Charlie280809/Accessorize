@@ -66,11 +66,11 @@
             return $result['currency_balance'];
         }
 
-        public static function updateCurrencyBalance($id, $new_balance){
+        public static function updateCurrencyBalance($new_balance, $userId){
             $conn = Db::getConnection();
             $statement = $conn->prepare("UPDATE users SET currency_balance = :currency_balance WHERE id = :id");
-            $statement->bindValue(":id", $id);
             $statement->bindValue(":currency_balance", $new_balance);
+            $statement->bindValue(":id", $userId);
             $statement->execute();
         }
 

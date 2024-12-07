@@ -10,7 +10,7 @@ namespace App\Accessorize;
                 return self::$conn;
             }
             else{
-                echo "❗";
+               echo "❗";
                 return self::$conn;
             }
         }

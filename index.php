@@ -2,7 +2,7 @@
   namespace App\Accessorize;
   require_once __DIR__.'./bootstrap.php';
   use App\Accessorize\Product;
-  use App\Accessorize\User; 
+  use App\Accessorize\User;
 
   if($_SESSION['loggedin']!== true){ //als de gebruiker niet is ingelogd
     header('Location: login.php'); //terug naar de loginpagina
