@@ -51,7 +51,7 @@
     
             <div><?php echo $succes ?></div>
 
-            <div>					
+            <div class="input">					
                 <label for="Oldpassword">Enter your current password</label>
                 <input type="text" name="current_password">
                             
@@ -61,7 +61,7 @@
                 <label for="confirmPassword">Enter your new password</label>
                 <input type="text" name="confirm_password">
             
-                <input type="submit" value="Change my password" class="changebtn">
+                <input type="submit" class="changePasswordBTN" value="Change my password" class="changebtn">
             </div>
         </form>
     </div>
