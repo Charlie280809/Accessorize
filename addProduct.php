@@ -36,7 +36,7 @@
 </head>
 <body>
     <?php include_once("nav.inc.php") ?>
-    <div class="profile">
+    <div>
         <form action="" method="post" class="new_product">
             <div>
                 <?php if(isset($error)): ?> 
@@ -84,9 +84,11 @@
                 <label for="IMG2">Add a third photo for your product. (Optional)</label>
                 <input type="text" name="img2_url">
             </div>
-            <div>
-                <input type="submit" value="Add new product to shop" class="addbtn">
-            </div>
+            <?php if($_SESSION['role']== 1): ?>
+                <div>
+                    <input type="submit" value="Add new product to shop" class="addbtn">
+                </div>
+            <?php endif; ?>
             <div><?php echo $succes ?></div>
         </form>
     </div>
