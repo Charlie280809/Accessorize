@@ -5,40 +5,30 @@
     use App\Accessorize\OrderItem;
     use App\Accessorize\User;
 
-
-    session_start();
-    include_once(__DIR__."/classes/Db.php");
-    include_once(__DIR__."/classes/Order.php");
-    include_once(__DIR__."/classes/OrderItem.php");
-    include_once(__DIR__."/classes/User.php");
-
+    $currentUser = User::getUserByEmail($_SESSION['email']); //get current user
+    $userId = $currentUser['id'];
+    
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
         if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
             die("You must be logged in.");
         }
-
-        $currentUser = User::getUserByEmail($_SESSION['email']); //get current user
-        $userId = $currentUser['id'];
-        $userCurrencyBalance = $currentUser['currency_balance'];
         
         $cart = $_SESSION['cart'] ?? [];
 
         //calculate full price of all products combined
-        $totalPrice = 0;
         foreach ($_SESSION['cart'] as $product) {
             $totalPrice += $product['price'] * $product['quantity'];
         }
+        var_dump(number_format($totalPrice, 2, '.', ''));
 
-        // if ($userCurrencyBalance >= $totalPrice) { //check if user has enough currency
-        //     $newBalance = number_format($userCurrencyBalance - $totalPrice, 2, '.', '');
+        $userCurrencyBalance = $currentUser['currency_balance'];
 
-        //     $newBalance = (float)$newBalance;
-        //     // var_dump($userId);
-
-        //     $currentUser::updateCurrencyBalance($userId, $newBalance);
-        
-
+        if ($userCurrencyBalance >= $totalPrice) { //check if user has enough currency
+            $newBalance = number_format($userCurrencyBalance - $totalPrice, 2, '.', '');
+            var_dump($newBalance);
+            $currentUser::updateCurrencyBalance(200, $userId);
+            
             // create new order
             $order = new Order();
             $order->setUserId($userId);
@@ -54,10 +44,11 @@
                 $orderItem->save();
             }
 
-        //     unset($_SESSION['cart']); //empty cart after checkout
+            unset($_SESSION['cart']); //empty cart after checkout
 
-        //     header('Location: orders.php'); //go to orders
-        // } else {
-        //     echo "You do not have enough currency to complete this purchase.";
+            header('Location: orders.php'); //go to orders
+        } else {
+            echo "You do not have enough currency to complete this purchase.";
         }
+    }
 ?>
