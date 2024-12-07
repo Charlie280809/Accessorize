@@ -20,9 +20,12 @@
   }
 
   if($_SESSION['role'] == 1){ //if the user is an admin
-    $showUpdatebtn = true;
+    $admin = true;
   }
 
+  if($_SESSION['role'] == 0){ //if the user is a customer
+    $customer = true;
+  }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,16 +56,18 @@
         <p class="product_color"><?php echo 'Color: '.$product['color'] ?></p>
         <p class="product_creator"><?php echo 'created by '.$product['created_by'] ?></p>
 
-        <form class="addProductToCart" action="cart.php" method="post">
-          <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-          <input type="hidden" name="product_name" value="<?php echo $product['title']; ?>">
-          <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
-          <label for="quantity">Quantity:</label>
-          <input type="number" name="quantity" id="quantity" value="1" min="1">
-          <button type="submit" name="add_to_cart">Add to Cart</button>
-        </form>
+        <?php if($customer): //only customers can add products to cart ?>
+          <form class="addProductToCart" action="cart.php" method="post">
+            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+            <input type="hidden" name="product_name" value="<?php echo $product['title']; ?>">
+            <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" id="quantity" value="1" min="1">
+            <button type="submit" name="add_to_cart">Add to Cart</button>
+          </form>
+        <?php endif; ?>
 
-        <?php if(isset($showUpdatebtn)): //only admins can update products ?>
+        <?php if($admin): //only admins can update products ?>
           <a href="updateProduct.php?id=<?php echo $product['id']; ?>" class="btn">Update product</a>
         <?php endif; ?>
       </div>
@@ -70,11 +75,11 @@
 
     <div class="reviews">
       <div class="reviews_form">
-
-        <?php if(isset($showReviewInput)): //only verified buyers can leave reviews ?>
+        <h3>Reviews</h3>
+        <?php if($customer && isset($showReviewInput)): //only verified buyers can leave reviews ?>
           <input type="text" id="review_content" placeholder="Leave a review here">
           <a href="#" class="btn" id="addReviewbtn" data-productid="<?php echo $product['id']; ?> ">Add review</a>
-        <?php else: ?>
+        <?php elseif($customer): ?>
          <p> <i>If you want to leave a review, you first have to buy the item</i>😉</p>
         <?php endif; ?>
       </div>
