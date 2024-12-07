@@ -30,6 +30,7 @@ body{
     padding-left: 20px;
     width: 100%;
     color: white;
+    position: fixed;
 }
 .navbar_top{
     display: flex;
@@ -41,7 +42,11 @@ body{
     margin: 0;
 }
 .navbar_top h2{
+    font-size: 200%;
     color: rgb(75, 75, 245);
+}
+.user_links{
+    font-size: 90%;
 }
 .navbar_bottom{
     display: flex;
@@ -56,29 +61,20 @@ body{
     text-decoration: none;
 }
 .navbar a:hover{
-    color: rgb(75, 75, 245);
+    color: rgb(100, 100, 255);
 }
 .navbar_bottom a + a {
     border-left: 1px solid white;
     padding-left: 10px;
 }
-.search{
-    margin-left: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-.search input{
-    width: 100%;
-    height: 25px;
-}
 .logo img{
-    width: 70px;
-    height: 70px;
+    width: 5em;
+    height: 5em;
 }
-
 
 /* index.php */
 .accessorize{
+    padding-top: 200px;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -92,12 +88,37 @@ body{
 }
 .collection_link{
     width: 100%;
+    height: 100%;
+    text-decoration: none;
 }
-.collection_product img{ /*image van de producten*/
+.collection_product img{
     width: 10em;
     height: 10em;
+    border-radius: 0.5em;
+    align-self: center;
 }
-
+.collection_product{
+    background-color: rgb(210, 210, 250);
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.8em;
+    padding: 0.5em;
+    height: 20em;
+}
+.product_title{
+    font-size: 110%;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}
+.product_price{
+    position: static;
+    right: 10px;
+    font-size: 100%;
+    font-weight: bold;
+    color: rgb(75, 75, 245);
+    text-align: right;
+}
 
 /* product.php */
 .product{
@@ -110,7 +131,6 @@ body{
 .product_thumbnail{
     width: 300px;
     height: 300px;
-    /*make sure picture is only*/
 }
 .product_imgs{
     display: flex;
@@ -121,22 +141,81 @@ body{
 .product_imgs img{
     width: 100px;
 }
-
-/* AddProduct.php */
-.profile{
-    width: 100%;
-    max-width: 700px;
-    margin: 5em auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 5px rgba(120, 120, 120, 0.5);
+.product_description{
+    font-style: italic;
+}
+.updateProductbtn{
+    background-color: rgb(75, 75, 245);
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+.addToCartbtn{
+    background-color: rgb(75, 75, 245);
+    color: white;
+    text-decoration: none;
+    font-size: 110%;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    /* margin: 5px 0; */
+    border-radius: 10px;
 }
 
+.reviews{
+    background-color: rgb(210, 210, 250);
+    border-radius: 0.8em;
+    margin: 1em;
+    padding: 0px 5px 30px 5px;
+}
+.reviews_form{
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+.reviews_form input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 7px;
+}
+#addReviewbtn{
+    width: 30%;
+    background-color: rgb(75, 75, 245);
+    color: white;
+    text-decoration: none;
+    font-size: 110%;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+#addReviewbtn:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.reviews_list{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-left: -1em;
+}
+.reviews_list li{
+    width: 90%;
+    list-style-type: none;
+    padding: 10px 5px;
+}
+
+/* AddProduct.php */
 .new_product{
-    background-color: rgb(176, 176, 201);
-    padding: 20px;
-    margin: 1em auto;
+    background-color: rgb(210, 210, 250);
+    padding: 10px;
+    padding-top: 200px;
+    margin: 1.5em;
     font-weight: bold;
+    border-radius: 0.8em;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -177,20 +256,52 @@ body{
 }
 
 /* userInfo.php */
-.change_password{
-    background-color: rgb(210, 210, 250);
+.user_info{
     padding: 20px;
+    padding-top: 250px;
     margin: 1em auto;
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 0.5em;
+    align-items: center;
 }
+
+.user_info a{
+    width: 50%;
+    color: white;
+    text-decoration: none;
+    background-color: rgb(75, 75, 245);
+    padding: 10px;
+    border-radius: 7px;
+    text-align: center;
+}
+.user_info a:hover{
+    box-shadow:  0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* changePassword.php */
+.change_password{
+    background-color: rgb(210, 210, 250);
+    padding: 10px;
+    margin: 1.5em;
+    font-weight: bold;
+    border-radius: 0.8em;
+}
+
 .change_password input{
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px 0px 30px 0px;
     border-radius: 7px;
+}
+
+.changePasswordBTN{
+    border: none;
+    background-color: rgb(75, 75, 245);
+    color: white;
+    font-size: larger;
+    cursor: pointer;
 }
 
 /* cart.php */
