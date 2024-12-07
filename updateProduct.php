@@ -7,21 +7,29 @@
     use App\Accessorize\Db;
     use App\Accessorize\Cart;
     use App\Accessorize\Order;
-    
 
     if($_SESSION['role'] == 1){ //if the user is an admin
         $product = Product::getProductById($_GET['id']); //get product
         $productId = $product['id'];
-        var_dump($productId);
         if(!empty($_POST) && isset($_POST['update_product'])){ //if POST is not empty
             try{
-                $product->setTitle($_POST['title']);
-                $product->setPrice($_POST['price']);
-                $product->setDescription($_POST['description']);
-                $product->setStock_amount($_POST['stock_amount']);
-                $product->updateById($productId);
+                $sql = "UPDATE products SET title = :title, price = :price, description = :description, stock_amount = :stock_amount WHERE id = :product_id";
 
-                echo "Product updated!";
+                $statement = $conn->prepare($sql);
+                $statement->bindParam(':title', $_POST['title']);
+                $statement->bindParam(':price', $_POST['price']);
+                $statement->bindParam(':description', $_POST['description']);
+                $statement->bindParam(':stock_amount', $_POST['stock_amount']);
+                $statement->bindParam(':product_id', $productId);
+
+                if($statement->execute()){
+                    echo "Product is bijgewerkt!";
+                    header("Location:admin.php");
+                    exit;
+                }else{
+                    echo "Er is iets fout gegaan bij het bewerken van dit product";
+                }
+
             }
             catch(\Exception $e){
                 $error = $e->getMessage();
@@ -36,11 +44,6 @@
     }else{ //if the user is not an admin
         header('Location: index.php');
     }
-
-
-
-
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
