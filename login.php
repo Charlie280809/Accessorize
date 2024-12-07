@@ -11,6 +11,7 @@
             session_start(); //sessie wordt gestart
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
+            $_SESSION['role'] = User::getUserByEmail($email)['is_admin'];
             header('Location: index.php'); //doorverwijzing naar de indexpagina
         }else{
             $error = true;
