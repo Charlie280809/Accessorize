@@ -92,7 +92,7 @@
 
                 <div class="cart-footer">
                     <div class="cart-column cart-total-label" colspan="3">Total</div>
-                    <div class="cart-column cart-total-value">€<?= number_format($totalPrice, 2); ?></div>
+                    <div class="cart-column cart-total-value">€<?php echo isset($totalPrice) ? number_format($totalPrice, 2): '0.00'; ?></div>
                 </div>
             </div>
             <form action="checkout.php" method="post">
