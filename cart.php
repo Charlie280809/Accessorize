@@ -5,7 +5,10 @@
     use App\Accessorize\Order;
     use App\Accessorize\OrderItem;
     
-
+    if($_SESSION['role'] == 1){
+        header('Location: index.php');
+    }
+    
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
         //make the cart an array
