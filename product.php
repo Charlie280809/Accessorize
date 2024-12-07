@@ -8,24 +8,26 @@
   $product = App\Accessorize\Product::getProductById($_GET['id']);
 
   if(!isset($_GET['id']) == $product){
-    exit("Product not found");
+    exit("Product not found, go back to the <a href='index.php'>homepage</a>");
+  }else{
+    $allReviews = Review::getAllReviewsByProductId($_GET['id']);
+
+    $currentUser = User::getUserByEmail($_SESSION['email']);
+    $userId = $currentUser['id'];
+    if(Review::isVerifiedBuyer($userId, $_GET['id'])){ //user is verified to leave a review
+      $showReviewInput = true;
+    }
+
+    if($_SESSION['role'] == 1){ //if the user is an admin
+      $admin = true;
+    }
+
+    if($_SESSION['role'] == 0){ //if the user is a customer
+      $customer = true;
+    }
   }
 
-  $allReviews = Review::getAllReviewsByProductId($_GET['id']);
-
-  $currentUser = User::getUserByEmail($_SESSION['email']);
-  $userId = $currentUser['id'];
-  if(Review::isVerifiedBuyer($userId, $_GET['id'])){ //user is verified to leave a review
-    $showReviewInput = true;
-  }
-
-  if($_SESSION['role'] == 1){ //if the user is an admin
-    $admin = true;
-  }
-
-  if($_SESSION['role'] == 0){ //if the user is a customer
-    $customer = true;
-  }
+  
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
