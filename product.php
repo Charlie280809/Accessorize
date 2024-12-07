@@ -1,5 +1,7 @@
 <?php
-  require_once(__DIR__."./bootstrap.php");
+  require_once __DIR__."./bootstrap.php";
+  use App\Accessorize\Db;
+  use App\Accessorize\Product;
   use App\Accessorize\Review;
   use App\Accessorize\User;
 
