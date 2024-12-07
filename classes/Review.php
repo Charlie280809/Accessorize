@@ -1,6 +1,6 @@
 <?php 
     namespace App\Accessorize;
-    include_once(__DIR__."/Db.php");
+    require_once __DIR__."./Db.php";
 
     class Review{
         private $user_id;
@@ -47,11 +47,7 @@
             return $result['count'] > 0; // returns true if user has bought the product
         }
 
-        public function save(){
-            if (!self::isVerifiedBuyer($this->getUserId(), $this->getProductId())) {
-                throw new \Exception("Je moet het product eerst kopen voordat je een review kunt achterlaten.");
-            }
-        
+        public function save(){     
             $conn = Db::getConnection();
             $statement = $conn->prepare("INSERT INTO reviews (user_id, product_id, content) VALUES (:user_id, :product_id, :content)");
             $statement->bindValue(":user_id", $this->getUserId());

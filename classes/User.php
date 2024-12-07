@@ -1,6 +1,6 @@
 <?php
     namespace App\Accessorize;
-    require_once __DIR__."/Db.php";
+    require_once __DIR__."./Db.php";
     class User {
         private $username; //gets created by user in signup
         private $email; //gets created by user in signup
@@ -56,23 +56,13 @@
             return $this;
         }
 
-        public static function getCurrencyBalanceByEmail($email){
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT currency_balance FROM users WHERE email = :email");
-            $statement->bindValue(":email", $email);
-            $statement->execute();
-            $result = $statement->fetch(\PDO::FETCH_ASSOC);
-
-            return $result['currency_balance'];
-        }
-
         public static function updateCurrencyBalance($new_balance, $userId){
             $conn = Db::getConnection();
             $statement = $conn->prepare("UPDATE users SET currency_balance = :currency_balance WHERE id = :id");
             $statement->bindValue(":currency_balance", $new_balance);
             $statement->bindValue(":id", $userId);
             $statement->execute();
-        }
+        } //
 
         public static function emailExists($email){
             $conn = Db::getConnection();
@@ -81,7 +71,7 @@
             $statement->execute();
             $result = $statement->fetch(\PDO::FETCH_ASSOC);
             
-            return $result['count'] > 0;
+            return $result['count'] > 0; //check if the email is already in use
         }
 
         public static function canLogin($p_email, $p_password){
@@ -102,16 +92,6 @@
             }else{ //if user isn't found in db
                 return false;
             }
-        }
-
-        public static function getRole($email){
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT is_admin FROM users WHERE email = :email");
-            $statement->bindValue(":email", $email);
-            $statement->execute();
-            $result = $statement->fetch(\PDO::FETCH_ASSOC);
-            
-            return $result['is_admin'];
         }
 
         public static function getUserByEmail($email){
