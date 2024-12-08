@@ -15,6 +15,9 @@
     if($_SESSION['role'] == 0){
         $customer = true;
     }
+    if($_SESSION['role'] == 1){
+        $admin = true;
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +31,9 @@
     <div class="user_info">
         <?php if($customer): ?>
             <a href="orders.php">View your orders</a>
+        <?php endif; ?>
+        <?php if($admin): ?>
+            <a href="addProduct.php" class="addProductbtn">Add a new product</a>
         <?php endif; ?>
         <br>
         <a href="changePassword.php">Change password</a>
