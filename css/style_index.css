@@ -74,7 +74,7 @@ body{
 
 /* index.php */
 .accessorize{
-    padding-top: 200px;
+    padding-top: 220px;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -360,9 +360,40 @@ body{
 }
 
 /* orders.php */
-.order {
+.all_orders{
+    padding: 220px 1em;
     display: flex;
     flex-direction: column;
-    padding: 1em;
-    border: 2px solid #333;
+}
+.order {
+    border: 3px solid rgb(75, 75, 245);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgb(220, 220, 250);
+}
+
+.order p {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.order ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.order ul li {
+    background-color: rgb(210, 210, 250);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order ul li span {
+    font-weight: bold;
 }

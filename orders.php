@@ -23,7 +23,7 @@
 </head>
 <body>
     <?php include_once("nav.inc.php") ?>
-    <div class="profile">
+    <div class="all_orders">
         <h1>Your orders</h1>
         <?php foreach($orders as $order): ?>
             <div class="order">
@@ -41,6 +41,6 @@
                 </ul>
             </div>
         <?php endforeach; ?>
-    
+    </div>
 </body>
 </html>
