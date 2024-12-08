@@ -271,7 +271,7 @@ body{
 /* userInfo.php */
 .user_info{
     padding: 20px;
-    padding-top: 250px;
+    padding-top: 290px;
     margin: 1em auto;
     font-weight: bold;
     display: flex;
@@ -297,6 +297,7 @@ body{
 .change_password{
     background-color: rgb(210, 210, 250);
     padding: 10px;
+    padding-top: 220px;
     margin: 1.5em;
     font-weight: bold;
     border-radius: 0.8em;
