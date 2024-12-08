@@ -119,6 +119,15 @@ body{
     color: rgb(75, 75, 245);
     text-align: right;
 }
+.addProductbtn{
+    background-color: rgb(75, 75, 245);
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+}
 
 /* product.php */
 .product{
