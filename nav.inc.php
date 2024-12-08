@@ -3,6 +3,7 @@
   require_once __DIR__.'/bootstrap.php';
   use App\Accessorize\User;
   $currentUser = User::getUserByEmail($_SESSION['email']);
+  $customer = false;
   if($_SESSION['role'] == 0){
     $customer = true;
   }

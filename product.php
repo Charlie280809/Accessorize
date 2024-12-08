@@ -18,11 +18,11 @@
       $showReviewInput = true;
     }
 
+    $customer = false;
+    $admin = false;
     if($_SESSION['role'] == 1){ //if the user is an admin
       $admin = true;
     }
- 
-
     if($_SESSION['role'] == 0){ //if the user is a customer
       $customer = true;
     }
