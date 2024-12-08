@@ -161,8 +161,12 @@ body{
     cursor: pointer;
     text-align: center;
     padding: 10px;
-    /* margin: 5px 0; */
+    margin: 10px 0;
     border-radius: 10px;
+    border: none;
+}
+.addToCartbtn:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .reviews{

@@ -7,7 +7,6 @@
 
     $currentUser = User::getUserByEmail($_SESSION['email']); //get current user
     $userId = $currentUser['id'];
-    
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
         if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
@@ -19,15 +18,16 @@
         //calculate full price of all products combined
         foreach ($_SESSION['cart'] as $product) {
             $totalPrice += $product['price'] * $product['quantity'];
+            $totalPrice = number_format($totalPrice, 2, '.', '');
         }
-        var_dump(number_format($totalPrice, 2, '.', ''));
 
         $userCurrencyBalance = $currentUser['currency_balance'];
+        $userCurrencyBalance = (int)$userCurrencyBalance;
 
         if ($userCurrencyBalance >= $totalPrice) { //check if user has enough currency
             $newBalance = number_format($userCurrencyBalance - $totalPrice, 2, '.', '');
-            var_dump($newBalance);
-            $currentUser::updateCurrencyBalance(200, $userId);
+            $newBalance = (int)$newBalance;
+            $currentUser::updateCurrencyBalance($newBalance, $userId); //this should work, but it doesn't
             
             // create new order
             $order = new Order();
@@ -48,7 +48,7 @@
 
             header('Location: orders.php'); //go to orders
         } else {
-            echo "You do not have enough currency to complete this purchase.";
+            echo "Something went wrong. Please try again.";
         }
     }
 ?>
