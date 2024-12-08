@@ -28,7 +28,7 @@
         if ($userCurrencyBalance >= $totalPrice) { //check if user has enough currency
             $newBalance = number_format($userCurrencyBalance - $totalPrice, 2, '.', '');
             $newBalance = (int)$newBalance;
-            //$currentUser::updateCurrencyBalance($newBalance, $userId); //this should work, but it doesn't
+            $currentUser::updateCurrencyBalance($newBalance, $userId); //this should work, but it doesn't
             //^ I disabled it, so that the rest still works
 
             // create new order
