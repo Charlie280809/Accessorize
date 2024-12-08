@@ -4,8 +4,8 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    require_once __DIR__.'./classes/Db.php';
-    require_once __DIR__.'./classes/User.php';
+    require_once __DIR__.'/classes/Db.php';
+    require_once __DIR__.'/classes/User.php';
 
     if(!empty($_POST)){
         $email = $_POST['email'];

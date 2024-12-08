@@ -1,6 +1,6 @@
 <?php 
     namespace App\Accessorize;
-    require_once __DIR__."./Db.php";
+    require_once __DIR__."/Db.php";
 
     class Review{
         private $user_id;
