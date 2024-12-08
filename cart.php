@@ -43,16 +43,13 @@
     }
 
     //remove products from cart
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-        $action = $_POST['action'];
-        if ($action === 'remove') {
-            $productId = $_POST['product_id'];
-            foreach ($_SESSION['cart'] as $key => $item) {
-                if ($item['id'] === $productId) {
-                    unset($_SESSION['cart'][$key]);
-                    header('Location: cart.php');
-                    exit();
-                }
+    if (isset($_GET['action']) && $_GET['action'] === 'remove' && isset($_GET['id'])) {
+        $productId = $_GET['id'];
+        foreach ($_SESSION['cart'] as $key => $item) {
+            if ($item['id'] == $productId) {
+                unset($_SESSION['cart'][$key]);
+                header('Location: cart.php');
+                exit();
             }
         }
     }
