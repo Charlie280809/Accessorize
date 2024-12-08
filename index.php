@@ -44,9 +44,5 @@
       <?php endforeach; ?>
     </div>
   </div>
-  
-  <?php if($admin): ?>
-    <a href="addProduct.php">Add a new product</a>
-  <?php endif; ?>
-  </body>
+</body>
 </html>
