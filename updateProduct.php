@@ -32,7 +32,7 @@
                     header("Location:admin.php");
                     exit;
                 }else{
-                    echo "Er is iets fout gegaan bij het bewerken van dit product";
+                    $error = "Er is iets fout gegaan bij het bewerken van dit product";
                 }
 
             }
@@ -58,13 +58,13 @@
 </head>
 <body>
     <h2>Update product</h2>
-    <?php //if(isset($error)): ?>
-        <p><?php //echo $error; ?></p>
-    <?php //endif; ?>
+    <?php if(isset($error)): ?>
+        <p><?php echo $error; ?></p>
+    <?php endif; ?>
 
-    <?php //if(isset($succes)): ?>
-        <p><?php //echo $succes; ?></p>
-    <?php //endif; ?>
+    <?php if(isset($succes)): ?>
+        <p><?php echo $succes; ?></p>
+    <?php endif; ?>
 
     <form method="POST">
 
