@@ -7,11 +7,10 @@
     
     if($_SESSION['role'] == 1){
         header('Location: index.php');
-    }
+    } //admins don't have a cart
     
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
-        //make the cart an array
     }
 
     // add products to cart
@@ -55,6 +54,11 @@
     foreach ($_SESSION['cart'] as $item) {
         $totalPrice += $item['price'] * $item['quantity'];
     }
+
+    $userCurrencyBalance = User::getUserByEmail($_SESSION['email'])['currency_balance'];
+    if($userCurrencyBalance < $totalPrice){
+        $error = true;
+    }
 ?><!DOCTYPE html>
 <lang="en">
     <meta charset="UTF-8">
@@ -68,7 +72,7 @@
     <div class="accessorize">
         <h1>Your Cart</h1>
         <?php if (empty($_SESSION['cart'])): ?>
-            <p>Your cart is empty.</p>
+            <p>Your cart is empty. Add some things on the <a href="index.php">homepage</a></p>
         <?php else: ?>
             <div class="cart">
                 <div class="cart-header">
@@ -99,10 +103,10 @@
                 </div>
             </div>
             <form action="checkout.php" method="post">
-                <button type="submit" name="checkout">Buy all items in cart</button>
+                <button class="buyItemsbtn" type="submit" name="checkout">Buy all items in cart</button>
             </form>
             <?php if(isset($error)): //werkt nog niet ?>
-                <p>You do not have enough currency to buy these items.</p>
+                <p class="error">You do not have enough currency to buy these items.</p>
             <?php endif; ?>
         <?php endif; ?>
     </div>   
