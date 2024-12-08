@@ -80,7 +80,7 @@
         <h3>Reviews</h3>
         <?php if($customer && isset($showReviewInput)): //only verified buyers can leave reviews ?>
           <input type="text" id="review_content" placeholder="Leave a review here">
-          <a href="#" class="btn" id="addReviewbtn" data-productid="<?php echo $product['id']; ?> ">Add review</a>
+          <a href="#" id="addReviewbtn" data-productid="<?php echo $product['id']; ?> ">Add review</a>
         <?php elseif($customer): ?>
          <p> <i>If you want to leave a review, you first have to buy the item</i>😉</p>
         <?php endif; ?>
