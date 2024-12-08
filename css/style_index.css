@@ -360,10 +360,15 @@ body{
 }
 
 /* orders.php */
+.orders_page{
+    padding-top: 220px;
+    padding-left: 1em;
+    padding-right: 1em;
+}
 .all_orders{
-    padding: 220px 1em;
+    padding-bottom: 220px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 .order {
     border: 3px solid rgb(75, 75, 245);
