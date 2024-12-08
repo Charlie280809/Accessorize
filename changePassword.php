@@ -1,6 +1,6 @@
 <?php
     namespace App\Accessorize;
-    require_once __DIR__.'./bootstrap.php';
+    require_once __DIR__.'/bootstrap.php';
     use App\Accessorize\User;
 
     if($_SESSION['loggedin']!== true){

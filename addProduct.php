@@ -1,6 +1,6 @@
 <?php
     namespace App\Accessorize;
-    require_once __DIR__.'./bootstrap.php';
+    require_once __DIR__.'/bootstrap.php';
     use App\Accessorize\Product;
 
     if($_SESSION['role']== 1){ //if the user is an admin
