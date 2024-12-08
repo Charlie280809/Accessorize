@@ -428,3 +428,54 @@ body{
 .order ul li span {
     font-weight: bold;
 }
+
+/* updateProduct.php */
+.updateProductPage{
+    padding-top: 200px;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.update_form{
+    background-color: rgb(210, 210, 250);
+    padding: 10px;
+    margin: 1.5em;
+    font-weight: bold;
+    border-radius: 0.8em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.update_form input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 7px;
+}
+.updateProductbtn{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: rgb(75, 75, 245);
+    color: white;
+    font-size: larger;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.updateProductbtn:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.deleteProductbtn{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: rgb(255, 83, 83);
+    color: white;
+    font-size: larger;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.deleteProductbtn:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
