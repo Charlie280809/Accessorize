@@ -1,10 +1,9 @@
 <?php
     namespace App\Accessorize;
     require_once __DIR__.'/bootstrap.php';
+    use App\Accessorize\User;
     use App\Accessorize\Order;
     use App\Accessorize\OrderItem;
-    use App\Accessorize\User;
-    use App\Accessorize\Product;
 
     if($_SESSION['loggedin']!== true){
         header('Location: login.php');

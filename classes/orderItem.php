@@ -2,6 +2,7 @@
     namespace App\Accessorize;
     require_once __DIR__."/Db.php";
     
+    echo 'orderitem callss conected';
     class orderItem {
         private $id;
         private $order_id;
