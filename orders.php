@@ -29,7 +29,7 @@
             <?php foreach($orders as $order): ?>
                 <div class="order">
                     <p>Order date: <?php echo $order['order_date'] ?></p>
-                    <p>Total price: <?php echo $order['total_price'] ?></p>
+                    <p>Total price: €<?php echo $order['total_price'] ?></p>
                     <p>Items bought:</p>
                     <ul>
                     <?php
