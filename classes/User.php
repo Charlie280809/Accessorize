@@ -62,7 +62,7 @@
             $statement->bindValue(":currency_balance", $new_balance);
             $statement->bindValue(":id", $userId);
             $statement->execute();
-        } //
+        }
 
         public static function emailExists($email){
             $conn = Db::getConnection();
