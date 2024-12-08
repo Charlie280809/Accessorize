@@ -3,7 +3,7 @@
     use App\Accessorize\Product;
     use App\Accessorize\User;
     use App\Accessorize\Order;
-    use App\Accessorize\OrderItem;
+    use App\Accessorize\orderItem;
     
     if($_SESSION['role'] == 1){
         header('Location: index.php');

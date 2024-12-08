@@ -2,7 +2,7 @@
     namespace App\Accessorize;
     require_once __DIR__.'/bootstrap.php';
     use App\Accessorize\Order;
-    use App\Accessorize\OrderItem;
+    use App\Accessorize\orderItem;
     use App\Accessorize\User;
 
     $currentUser = User::getUserByEmail($_SESSION['email']); //get current user

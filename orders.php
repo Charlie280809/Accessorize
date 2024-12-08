@@ -3,7 +3,7 @@
     require_once __DIR__.'/bootstrap.php';
     use App\Accessorize\User;
     use App\Accessorize\Order;
-    use App\Accessorize\OrderItem;
+    use App\Accessorize\orderItem;
 
     if($_SESSION['loggedin']!== true){
         header('Location: login.php');
