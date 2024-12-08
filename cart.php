@@ -19,7 +19,7 @@
         $productName = $_POST['product_name'];
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
-        $thumbnail = $_POST['thumbnail_url'];
+        $thumbnail = isset($_POST['thumbnail_url']) ? $_POST['thumbnail_url'] : ''; // Ensure thumbnail_url is set
 
         //if the item is already in the cart
         foreach ($_SESSION['cart'] as &$item) { //for all the items in the cart
