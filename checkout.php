@@ -16,6 +16,7 @@
         $cart = $_SESSION['cart'] ?? [];
 
         //calculate full price of all products combined
+        $totalPrice = 0.00;
         foreach ($_SESSION['cart'] as $product) {
             $totalPrice += $product['price'] * $product['quantity'];
             $totalPrice = number_format($totalPrice, 2, '.', '');
