@@ -64,7 +64,7 @@
     }
 
     $userCurrencyBalance = User::getUserByEmail($_SESSION['email'])['currency_balance'];
-    $error = false;
+    $error = '';
     if($userCurrencyBalance < $totalPrice){
         $error = true;
     }
@@ -114,7 +114,7 @@
             <form action="checkout.php" method="post">
                 <button class="buyItemsbtn" type="submit" name="checkout">Buy all items in cart</button>
             </form>
-            <?php if(isset($error)): //werkt nog niet ?>
+            <?php if($error): ?>
                 <p class="error">You do not have enough currency to buy these items.</p>
             <?php endif; ?>
         <?php endif; ?>
