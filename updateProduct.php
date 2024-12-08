@@ -29,7 +29,7 @@
 
                 if($statement->execute()){
                     $succes = "Product is bijgewerkt!";
-                    header("Location:admin.php");
+                    header("Location:index.php");
                     exit;
                 }else{
                     $error = "Er is iets fout gegaan bij het bewerken van dit product";
