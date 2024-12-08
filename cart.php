@@ -64,6 +64,7 @@
     }
 
     $userCurrencyBalance = User::getUserByEmail($_SESSION['email'])['currency_balance'];
+    $error = false;
     if($userCurrencyBalance < $totalPrice){
         $error = true;
     }

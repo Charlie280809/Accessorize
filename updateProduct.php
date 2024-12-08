@@ -8,6 +8,8 @@
     use App\Accessorize\Cart;
     use App\Accessorize\Order;
 
+    $error = '';
+
     if($_SESSION['role'] == 1){ //if the user is an admin
         $product = Product::getProductById($_GET['id']); //get product
         $productId = $product['id'];

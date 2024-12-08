@@ -3,6 +3,9 @@
     require_once __DIR__.'/bootstrap.php';
     use App\Accessorize\Product;
 
+    $succes = '';
+    $error = '';
+
     if($_SESSION['role']== 1){ //if the user is an admin
         if(!empty($_POST)){ //is POST is not empty
             try{

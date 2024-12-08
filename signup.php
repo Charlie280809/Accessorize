@@ -2,6 +2,8 @@
     namespace App\Accessorize;
     require_once __DIR__.'/bootstrap.php';
     use App\Accessorize\User;
+    
+    $error = '';
 
     if(!empty($_POST)){ //als de POST niet leeg is, dus als er iets gesubmit is
         try{
