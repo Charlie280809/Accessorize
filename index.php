@@ -4,13 +4,9 @@
   use App\Accessorize\Product;
   use App\Accessorize\User;
 
-
-  session_start();
-  if($_SESSION['loggedin']!== true){
-    header('Location: login.php');
-    exit();
-  }
-  else{
+  if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header("Location: login.php");
+  }else{
     if($_SESSION['role'] == 1){ //user is admin
       $admin = true;
     }
