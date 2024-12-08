@@ -40,10 +40,10 @@
     <div class="product">
     
       <div class="product_imgs">
-        <?php if($product['img1_url'] !== null || $product['img1_url'] !== ""): //if img1 exists ?>
+        <?php if($product['img1_url'] !== null || $product['img1_url'] !== " "): //if img1 exists ?>
           <img src="./images/<?php echo $product['img1_url'] ?>.png" alt=" <?php echo $product['title'] ?>" >
         <?php endif; ?>
-        <?php if($product['img2_url'] !== null || $product['img2_url'] !== ""): //if img2 exists ?>
+        <?php if($product['img2_url'] !== null || $product['img2_url'] !== " "): //if img2 exists ?>
           <img src="./images/<?php echo $product['img2_url'] ?>.png" alt=" <?php echo $product['title'] ?>" >
         <?php endif; ?>
       </div>
