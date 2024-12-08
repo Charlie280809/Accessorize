@@ -42,7 +42,7 @@
         }
 
         if(isset($_POST['delete_product'])){
-            $product::deleteById($product['id']);
+            Product::deleteById($product['id']);
             $error = 'product deleted';
             header('Location: index.php');
         }
