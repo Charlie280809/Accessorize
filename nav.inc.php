@@ -11,7 +11,7 @@
     <a href="index.php" class="logo"><img src="Moon_Logo.png" alt="logo"></a>
     <h2>Accessorize</h2>
     <div class="user_links">
-      <p><a href="userInfo.php" >Profile <?php echo $currentUser['username']; ?></a></p>
+      <p><a href="userInfo.php" >Go to profile [<?php echo $currentUser['username']; ?>]</a></p>
         
       <?php if($customer): //als de gebruiker geen admin is ?> 
         <p><?php echo 'Your balance: €'.htmlspecialchars($currentUser['currency_balance']); ?></p>
