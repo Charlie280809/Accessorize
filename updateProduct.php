@@ -9,6 +9,7 @@
     use App\Accessorize\Order;
 
     $error = '';
+    $succes = '';
 
     if($_SESSION['role'] == 1){ //if the user is an admin
         $product = Product::getProductById($_GET['id']); //get product
@@ -24,9 +25,10 @@
                 $statement->bindParam(':description', $_POST['description']);
                 $statement->bindParam(':stock_amount', $_POST['stock_amount']);
                 $statement->bindParam(':product_id', $productId);
+                $statement->execute();
 
                 if($statement->execute()){
-                    echo "Product is bijgewerkt!";
+                    $succes = "Product is bijgewerkt!";
                     header("Location:admin.php");
                     exit;
                 }else{
