@@ -23,6 +23,9 @@ document.querySelector("#addReviewbtn").addEventListener("click", function(event
         document.querySelector("#review_content").value = "";
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('Error during fetch:', error);
     });
+
+    console.log("Content: ", content);
+        console.log("Product ID: ", productId);
 });
