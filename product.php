@@ -21,6 +21,9 @@
     if($_SESSION['role'] == 1){ //if the user is an admin
       $admin = true;
     }
+    else{
+      $admin = false;
+    }
 
     if($_SESSION['role'] == 0){ //if the user is a customer
       $customer = true;
