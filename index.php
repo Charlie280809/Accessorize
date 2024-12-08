@@ -13,8 +13,7 @@
       
     if(empty($_GET['category'])){ //no category selected --> show all products
       $products = Product::getAll();
-    }
-    else{
+    }else{
       $products = Product::getByCategory($_GET['category']); //show products by category
     }
   }
