@@ -23,24 +23,26 @@
 </head>
 <body>
     <?php include_once("nav.inc.php") ?>
-    <div class="all_orders">
+    <div class="orders_page">
         <h1>Your orders</h1>
-        <?php foreach($orders as $order): ?>
-            <div class="order">
-                <p>Order date: <?php echo $order['order_date'] ?></p>
-                <p>Total price: <?php echo $order['total_price'] ?></p>
-                <p>Items bought:</p>
-                <ul>
-                <?php
-                    $orderItems = OrderItem::getItemsWithProductDetailsByOrderId($order['id']);
-                    foreach ($orderItems as $orderItem): ?>
-                        <li>
-                            <?php echo $orderItem['quantity'] . 'x ' . $orderItem['title'] . ' (' . $orderItem['price'] . ' €)'; ?>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endforeach; ?>
+        <div class="all_orders">
+            <?php foreach($orders as $order): ?>
+                <div class="order">
+                    <p>Order date: <?php echo $order['order_date'] ?></p>
+                    <p>Total price: <?php echo $order['total_price'] ?></p>
+                    <p>Items bought:</p>
+                    <ul>
+                    <?php
+                        $orderItems = OrderItem::getItemsWithProductDetailsByOrderId($order['id']);
+                        foreach ($orderItems as $orderItem): ?>
+                            <li>
+                                <?php echo $orderItem['quantity'] . 'x ' . $orderItem['title'] . ' (' . $orderItem['price'] . ' €)'; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 </body>
 </html>
