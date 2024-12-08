@@ -5,9 +5,12 @@
 
     if($_SESSION['loggedin']!== true){
         header('Location: login.php');
+        exit();
     }
     else{
         $currentUser = User::getUserByEmail($_SESSION['email']); //get user by email
+        $error = '';
+        $succes = '';   
         
         if(!empty($_POST)){ //if the POST is not empty
             $currentPassword = $_POST['current_password'];
@@ -58,7 +61,7 @@
                 <label for="NewPassword">Enter your new password</label>
                 <input type="text" name="new_password">
 
-                <label for="confirmPassword">Enter your new password</label>
+                <label for="confirmPassword">Enter your new password again</label>
                 <input type="text" name="confirm_password">
             
                 <input type="submit" class="changePasswordBTN" value="Change my password" class="changebtn">
