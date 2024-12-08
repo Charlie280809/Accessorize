@@ -13,6 +13,7 @@
         $productId = $product['id'];
         if(!empty($_POST) && isset($_POST['update_product'])){ //if POST is not empty
             try{
+                $conn = Db::getConnection();
                 $sql = "UPDATE products SET title = :title, price = :price, description = :description, stock_amount = :stock_amount WHERE id = :product_id";
 
                 $statement = $conn->prepare($sql);
